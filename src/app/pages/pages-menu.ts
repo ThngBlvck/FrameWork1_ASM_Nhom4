@@ -10,4 +10,64 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'home-outline',
     link: '/pages/dashboard',
   },
+  {
+    title: 'Salary',
+    icon: 'person-outline',
+    children: [
+      {
+        title: 'Creat',
+        link: '/pages/Salary/add',
+      },
+      
+    ]
+  },
+  {
+    title: 'Communications',
+    icon: 'person-outline',
+    children: [
+      {
+        title: 'Creat',
+        link: '/pages/Communications/add',
+      },
+      
+    ]
+  },
+  {
+    title: 'Nhân viên',
+    icon: 'person-outline',
+    children: [
+      {
+        title: 'Thêm',
+        link: '/pages/Employee/add',
+      },
+      {
+        title: 'Sửa',
+        link: '/pages/Employee/update',
+      },
+      {
+        title: 'Danh sách',
+        link: '/pages/Employee/list',
+      },
+      
+    ]
+  },
+  {
+    title: 'Phòng ban',
+    icon: 'person-outline',
+    children: [
+      {
+        title: 'Thêm',
+        link: '/pages/Departments/add',
+      },
+      {
+        title: 'Sửa',
+        link: '/pages/Departments/update',
+      },
+      {
+        title: 'Danh sách',
+        link: '/pages/Departments/list',
+      },
+      
+    ]
+  },
 ];
