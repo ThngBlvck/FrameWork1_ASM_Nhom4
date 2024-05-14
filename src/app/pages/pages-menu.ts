@@ -10,4 +10,26 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'home-outline',
     link: '/pages/dashboard',
   },
+  {
+    title: 'Salary',
+    icon: 'person-outline',
+    children: [
+      {
+        title: 'Creat',
+        link: '/pages/Salary/add',
+      },
+      
+    ]
+  },
+  {
+    title: 'Communications',
+    icon: 'person-outline',
+    children: [
+      {
+        title: 'Creat',
+        link: '/pages/Communications/add',
+      },
+      
+    ]
+  },
 ];
