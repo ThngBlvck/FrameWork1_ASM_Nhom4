@@ -26,6 +26,7 @@ const routes: Routes = [{
       .then(m => m.CommunicationsModule),
     },
     {
+<<<<<<<<< Temporary merge branch 1
       path: 'Dayoff',
       loadChildren: () => import('./dayoff/dayoff.module')
       .then(m => m.DayoffModule),
