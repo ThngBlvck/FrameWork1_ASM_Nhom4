@@ -26,7 +26,6 @@ const routes: Routes = [{
       .then(m => m.CommunicationsModule),
     },
     {
-
       path: 'Dayoff',
       loadChildren: () => import('./dayoff/dayoff.module')
       .then(m => m.DayoffModule),
