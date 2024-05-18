@@ -26,7 +26,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Sửa Lương nhân viên',
         link: '/pages/Salary/edit',
       },
-      
+
     ],
   },
   {
@@ -44,7 +44,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Thêm thông tin nhân viên',
         link: '/pages/Communications/add',
       },
-      
+
     ],
   },
   {
@@ -63,7 +63,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Sửa',
         link: '/pages/Dayoff/update',
       }
-      
+
     ]
   },
   {
@@ -82,7 +82,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Sửa',
         link: '/pages/Position/update',
       }
-      
+
     ]
   }
 ];
