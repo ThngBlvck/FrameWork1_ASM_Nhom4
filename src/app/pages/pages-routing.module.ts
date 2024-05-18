@@ -14,7 +14,7 @@ const routes: Routes = [{
       component: DashboardComponent,
       data: {breadcrumb: 'Dashboard'},
     },
-    
+
     {
       path: 'Salary',
       loadChildren: () => import('./salary/salary.module')
@@ -35,6 +35,16 @@ const routes: Routes = [{
       loadChildren: () => import('./position/position.module')
       .then(m => m.PositionModule),
     }
+    {
+      path: 'Employee',
+      loadChildren: () => import('./employee/employee.module')
+      .then(m => m.EmployeeModule),
+    },
+    {
+      path: 'Departments',
+      loadChildren: () => import('./departments/departments.module')
+      .then(m => m.DepartmentsModule),
+    },
   ],
 }];
 
