@@ -25,6 +25,16 @@ const routes: Routes = [{
       loadChildren: () => import('./communications/communications.module')
       .then(m => m.CommunicationsModule),
     },
+    {
+      path: 'Dayoff',
+      loadChildren: () => import('./dayoff/dayoff.module')
+      .then(m => m.DayoffModule),
+    },
+    {
+      path: 'Position',
+      loadChildren: () => import('./position/position.module')
+      .then(m => m.PositionModule),
+    }
   ],
 }];
 

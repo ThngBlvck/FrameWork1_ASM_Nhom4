@@ -32,4 +32,42 @@ export const MENU_ITEMS: NbMenuItem[] = [
       
     ]
   },
+  {
+    title: 'Lịch nghĩ',
+    icon: 'person-outline',
+    children: [
+      {
+        title: 'Thêm',
+        link: '/pages/Dayoff/add',
+      },
+      {
+        title: 'Danh sách',
+        link: '/pages/Dayoff/list',
+      },
+      {
+        title: 'Sửa',
+        link: '/pages/Dayoff/update',
+      }
+      
+    ]
+  },
+  {
+    title: 'Chức vụ',
+    icon: 'person-outline',
+    children: [
+      {
+        title: 'Thêm',
+        link: '/pages/Position/add',
+      },
+      {
+        title: 'Danh sách',
+        link: '/pages/Position/list',
+      },
+      {
+        title: 'Sửa',
+        link: '/pages/Position/update',
+      }
+      
+    ]
+  }
 ];

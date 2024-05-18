@@ -1,0 +1,35 @@
+<!-- <div class="container"> -->
+<div class="col-md-12">
+  <nb-card>
+    <nb-card-header>Day Off</nb-card-header>
+    <nb-card-body>
+      <form>
+        <div class="form-group row py-1">
+          <label for="inputEmail1" class="label col-sm-3 col-form-label">Tên nhân viên</label>
+          <div class="col-sm-9">
+            <input type="email" nbInput fullWidth id="inputEmail1" placeholder="Email">
+          </div>
+        </div>
+        <div class="form-group row py-1">
+          <label for="inputPassword2" class="label col-sm-3 col-form-label">Lí do</label>
+          <div class="col-sm-9">
+            <input type="password" nbInput fullWidth id="inputPassword2" placeholder="Password">
+          </div>
+        </div>
+        <div class="form-group row py-1">
+          <label class="col-sm-3 label">Ngày nghĩ</label>
+          <div class="col-sm-9">
+            <input nbInput placeholder="Form Picker" [nbDatepicker]="formpicker">
+            <nb-datepicker #formpicker></nb-datepicker>
+          </div>
+
+        </div>
+        <div class="form-group row py-1">
+          <div class="offset-sm-3 col-sm-9">
+            <button type="submit" nbButton status="primary">Sign in</button>
+          </div>
+        </div>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>
