@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EditComponent {
   [x: string]: any;
   employees: Employee[] = [
-    { 
+    {
       id: 1,
       fullName: "Nguyễn Văn A",
       email: "nguyenvana@example.com",
@@ -40,7 +40,7 @@ export class EditComponent {
         // Giả sử bạn có một service tải thông tin nhân viên từ server
         // this.employee = this.employeeService.getEmployeeById(employeeId);
         // Trong trường hợp này, dữ liệu được giả định từ một nguồn dữ liệu giả định:
-        this.employee = this.getEmployeeByIdFromMockData(employeeId);
+        this.employees = this.getEmployeeByIdFromMockData(employeeId);
       }
     });
 }
@@ -51,5 +51,5 @@ interface Employee {
   email: string;
   phoneNumber: string;
   permanentAddress: string;
-  temporaryAddress?: string; 
+  temporaryAddress?: string;
 }

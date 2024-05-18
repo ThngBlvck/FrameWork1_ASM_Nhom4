@@ -34,7 +34,7 @@ const routes: Routes = [{
       path: 'Position',
       loadChildren: () => import('./position/position.module')
       .then(m => m.PositionModule),
-    }
+    },
     {
       path: 'Employee',
       loadChildren: () => import('./employee/employee.module')
@@ -45,6 +45,16 @@ const routes: Routes = [{
       loadChildren: () => import('./departments/departments.module')
       .then(m => m.DepartmentsModule),
     },
+    {
+      path: 'Efficiency',
+      loadChildren: () => import('./efficiency/efficiency.module')
+        .then(m => m.EfficiencyModule),
+    },
+    {
+      path: 'HPreports',
+      loadChildren: () => import('./hpreports/hpreports.module')
+        .then(m => m.HPreportsModule),
+    }
   ],
 }];
 
