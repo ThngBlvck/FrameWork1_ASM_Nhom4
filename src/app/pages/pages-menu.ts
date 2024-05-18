@@ -84,5 +84,43 @@ export const MENU_ITEMS: NbMenuItem[] = [
       }
 
     ]
+  },
+  {
+    title: 'Nhân viên',
+    icon: 'person-outline',
+    children: [
+      {
+        title: 'Thêm',
+        link: '/pages/Employee/add',
+      },
+      {
+        title: 'Danh sách',
+        link: '/pages/Employee/list',
+      },
+      {
+        title: 'Sửa',
+        link: '/pages/Employee/update',
+      }
+
+    ]
+  },
+  {
+    title: 'Phòng ban',
+    icon: 'person-outline',
+    children: [
+      {
+        title: 'Thêm',
+        link: '/pages/Departments/add',
+      },
+      {
+        title: 'Danh sách',
+        link: '/pages/Departments/list',
+      },
+      {
+        title: 'Sửa',
+        link: '/pages/Departments/update',
+      }
+
+    ]
   }
 ];
