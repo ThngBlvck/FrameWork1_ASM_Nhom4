@@ -27,6 +27,7 @@ export class EditComponent {
   ];
 
   isNew: boolean = true;
+  employee: any;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 

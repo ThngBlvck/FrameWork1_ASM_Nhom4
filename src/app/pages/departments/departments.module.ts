@@ -14,15 +14,16 @@ import {
 } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { CommunicationsRoutingModule } from './communications-routing.module';
-import { CommunicationsComponent } from './communications.component';
+import { DepartmentsRoutingModule } from './departments-routing.module';
+import { DepartmentsComponent } from './departments.component';
 import { AddComponent } from './add/add.component';
 import { FormsModule as ngFormsModule } from '@angular/forms';
+import { UpdateComponent } from './update/update.component';
 import { ListComponent } from './list/list.component';
-import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   imports: [
+    // Ng2SmartTableModule,
     ThemeModule,
     NbInputModule,
     NbCardModule,
@@ -32,11 +33,11 @@ import { EditComponent } from './edit/edit.component';
     NbCheckboxModule,
     NbRadioModule,
     NbDatepickerModule,
-    CommunicationsRoutingModule,
+    DepartmentsRoutingModule,
     NbSelectModule,
     NbIconModule,
     ngFormsModule,
   ],
-  declarations: [CommunicationsComponent, AddComponent, ListComponent, EditComponent],
+  declarations: [DepartmentsComponent, AddComponent, UpdateComponent, ListComponent],
 })
-export class CommunicationsModule {}
+export class DepartmentsModule {}
