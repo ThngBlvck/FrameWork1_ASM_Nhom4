@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 
 import {PagesComponent} from './pages.component';
 import {DashboardComponent} from "./dashboard/dashboard.component";
-import {SalaryComponent} from "./salary/salary.component";
 
 const routes: Routes = [{
   path: '',
@@ -14,7 +13,7 @@ const routes: Routes = [{
       component: DashboardComponent,
       data: {breadcrumb: 'Dashboard'},
     },
-    
+
     {
       path: 'Salary',
       loadChildren: () => import('./salary/salary.module')

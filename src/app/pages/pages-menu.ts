@@ -18,7 +18,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Creat',
         link: '/pages/Salary/add',
       },
-      
+
     ]
   },
   {
@@ -29,7 +29,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Creat',
         link: '/pages/Communications/add',
       },
-      
+
     ]
   },
   {
@@ -48,7 +48,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Danh sách',
         link: '/pages/Employee/list',
       },
-      
+
     ]
   },
   {
@@ -67,7 +67,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Danh sách',
         link: '/pages/Departments/list',
       },
-      
+
     ]
   },
 ];
