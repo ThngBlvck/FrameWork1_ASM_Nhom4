@@ -11,26 +11,41 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/dashboard',
   },
   {
-    title: 'Salary',
+    title: 'Lương nhân viên',
     icon: 'person-outline',
     children: [
       {
-        title: 'Creat',
+        title: 'Danh sách lương nhân viên',
+        link: '/pages/Salary/list',
+      },
+      {
+        title: 'Thêm Lương nhân viên',
         link: '/pages/Salary/add',
       },
+      {
+        title: 'Sửa Lương nhân viên',
+        link: '/pages/Salary/edit',
+      },
       
-    ]
+    ],
   },
   {
-    title: 'Communications',
+    title: 'Thông tin nhân viên',
     icon: 'person-outline',
     children: [
       {
-        title: 'Creat',
+        title: 'Danh sách thông tin nhân viên',
+        link: '/pages/Communications/list',
+      },
+      {
+        title: 'Sửa thông tin nhân viên',
+        link: '/pages/Communications/edit',
+      }, {
+        title: 'Thêm thông tin nhân viên',
         link: '/pages/Communications/add',
       },
       
-    ]
+    ],
   },
   {
     title: 'Lịch nghĩ',
