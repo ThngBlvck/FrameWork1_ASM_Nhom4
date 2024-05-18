@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-// import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 import {
   NbActionsModule,
   NbButtonModule,
@@ -18,10 +18,12 @@ import { CommunicationsRoutingModule } from './communications-routing.module';
 import { CommunicationsComponent } from './communications.component';
 import { AddComponent } from './add/add.component';
 import { FormsModule as ngFormsModule } from '@angular/forms';
+import { ListComponent } from './list/list.component';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   imports: [
-    // Ng2SmartTableModule,
+    Ng2SmartTableModule,
     ThemeModule,
     NbInputModule,
     NbCardModule,
@@ -36,6 +38,6 @@ import { FormsModule as ngFormsModule } from '@angular/forms';
     NbIconModule,
     ngFormsModule,
   ],
-  declarations: [CommunicationsComponent, AddComponent],
+  declarations: [CommunicationsComponent, AddComponent, ListComponent, EditComponent],
 })
 export class CommunicationsModule {}

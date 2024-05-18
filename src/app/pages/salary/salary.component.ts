@@ -4,6 +4,14 @@ import { Component } from '@angular/core';
   selector: 'app-salary',
   template: `<router-outlet></router-outlet>`,
 })
+
+
 export class SalaryComponent {
 
+
+ 
+
+
+ 
 }
+
