@@ -15,9 +15,9 @@ import {
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { HPreportsRoutingModule } from './hpreports-routing.module';
+import { HPreportsComponent } from './hpreports.component';
 import { FormsModule as ngFormsModule } from '@angular/forms';
-import { HPreportsComponent } from "./hpreports.component";
-import { ListComponent } from "./list/list.component";
+import { ListComponent } from './list/list.component';
 
 @NgModule({
   imports: [
