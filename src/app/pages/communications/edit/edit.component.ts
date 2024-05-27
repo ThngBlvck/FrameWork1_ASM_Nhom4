@@ -27,6 +27,7 @@ export class EditComponent {
   ];
 
   isNew: boolean = true;
+  employee: any;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -40,7 +41,7 @@ export class EditComponent {
         // Giả sử bạn có một service tải thông tin nhân viên từ server
         // this.employee = this.employeeService.getEmployeeById(employeeId);
         // Trong trường hợp này, dữ liệu được giả định từ một nguồn dữ liệu giả định:
-        this.employees = this.getEmployeeByIdFromMockData(employeeId);
+        this.employee = this.getEmployeeByIdFromMockData(employeeId);
       }
     });
 }
