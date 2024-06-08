@@ -6,6 +6,8 @@ const upload = multer({ dest: './public/images' });
 
 const EmployeeController = require("../controllers/EmployeeController");
 const DepartmentsController = require("../controllers/DepartmentController");
+const SalaryController = require("../controllers/SalaryController");
+const CommunicationsController = require("../controllers/CommunicationController");
 
 
 router.get('/employee',EmployeeController.getEmployee);
@@ -20,5 +22,17 @@ router.post('/departments', DepartmentsController.addDepartments);
 router.put('/departments/:id', DepartmentsController.updateDepartments);
 router.delete('/departments/:id', DepartmentsController.deleteDepartments);
 
+
+router.get('/salary',SalaryController.getSalary);
+router.get('salary/:id',SalaryController.getSalary);
+router.post('/salary', SalaryController.addSalary);
+router.put('/salary/:id', SalaryController.updateSalary);
+router.delete('/salary/:id', SalaryController.deleteSalary);
+
+router.get('/communications',CommunicationsController.getCommunications);
+router.get('communications/:id',CommunicationsController.getCommunicationsById);
+router.post('/communications', CommunicationsController.addCommunications);
+router.put('/communications/:id', CommunicationsController.updateCommunications);
+router.delete('/communications/:id', CommunicationsController.deleteCommunications);
 
 module.exports = router;
