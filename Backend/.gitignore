@@ -41,7 +41,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+<<<<<<< HEAD
 
 
 
 # Node
+=======
+>>>>>>> origin/main
