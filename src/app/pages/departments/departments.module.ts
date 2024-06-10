@@ -17,7 +17,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { DepartmentsRoutingModule } from './departments-routing.module';
 import { DepartmentsComponent } from './departments.component';
 import { AddComponent } from './add/add.component';
-import { FormsModule as ngFormsModule } from '@angular/forms';
+import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UpdateComponent } from './update/update.component';
 import { ListComponent } from './list/list.component';
 
@@ -37,6 +37,7 @@ import { ListComponent } from './list/list.component';
     NbSelectModule,
     NbIconModule,
     ngFormsModule,
+    ReactiveFormsModule
   ],
   declarations: [DepartmentsComponent, AddComponent, UpdateComponent, ListComponent],
 })

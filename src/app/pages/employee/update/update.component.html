@@ -4,49 +4,46 @@
       <nb-card>
         <nb-card-header>Nhân viên | Sửa</nb-card-header>
         <nb-card-body>
-          <form>
+          <form [formGroup]="editEmployee"  (ngSubmit)="saveUpdateEmployee()">
             <div class="form-group row py-1">
-              <label class="col-sm-3 label">Phòng ban</label>
+              <label class="col-sm-3 label" for="department_id">Phòng ban</label>
               <div class="col-sm-9">
-                <nb-select selected="1">
-                  <nb-option value="1">PB1</nb-option>
-                  <nb-option value="2">PB2</nb-option>
+                <nb-select selected="1" name="department_id" id="department_id" formControlName="department_id">
+                  <nb-option *ngFor="let department of departments" value="{{ department.id }}">{{ department.name }}</nb-option>
                 </nb-select>
+                <small *ngIf="editEmployee.get('department_id').invalid && (editEmployee.get('department_id').dirty || editEmployee.get('department_id').touched)">
+                  <i class="text-danger">Vui long khong bo trong</i>
+                </small>
               </div>
             </div>
 
             <div class="form-group row py-1">
-              <label class="col-sm-3 label">Chức vụ</label>
+              <label class="col-sm-3 label" for="position_id">Chức vụ</label>
               <div class="col-sm-9">
-                <nb-select selected="1">
-                  <nb-option value="1">CV1</nb-option>
-                  <nb-option value="2">CV2</nb-option>
+                <nb-select selected="1" name="position_id" id="position_id" formControlName="position_id">
+                  <nb-option *ngFor="let position of positions" value="{{ position.id }}">{{ position.name }}</nb-option>
                 </nb-select>
+                <small *ngIf="editEmployee.get('position_id').invalid && (editEmployee.get('position_id').dirty || editEmployee.get('position_id').touched)">
+                  <i class="text-danger">Vui long khong bo trong</i>
+                </small>
               </div>
             </div>
 
-            <div class="form-group row py-1">
-              <label for="inputEmail1" class="label col-sm-3 col-form-label">Email</label>
-              <div class="col-sm-9">
-                <input type="email" nbInput fullWidth id="inputEmail1" placeholder="Email">
-              </div>
-            </div>
+
 
             <div class="form-group row py-1">
-              <label for="inputEmail1" class="label col-sm-3 col-form-label">Họ và tên</label>
+              <label class="label col-sm-3 col-form-label" for="name" >Họ và tên</label>
               <div class="col-sm-9">
                 <div class="full-name-inputs">
-                  <input type="text" nbInput fullWidth placeholder="Họ và tên">
+                  <input type="text" nbInput fullWidth id="name" placeholder="Họ và tên" name="name" formControlName="name">
+                  <small *ngIf="editEmployee.get('name').invalid && (editEmployee.get('name').dirty || editEmployee.get('name').touched)">
+                    <i class="text-danger">Vui long khong bo trong</i>
+                  </small>
                 </div>
               </div>
             </div>
 
-            <div class="form-group row py-1">
-              <label for="inputEmail1" class="label col-sm-3 col-form-label">Số điện thoại</label>
-              <div class="col-sm-9">
-                <input type="email" nbInput fullWidth id="inputEmail1" placeholder="Số điện thoại">
-              </div>
-            </div>
+
 
             <div class="form-group row">
               <div class="offset-sm-3 col-sm-9">
