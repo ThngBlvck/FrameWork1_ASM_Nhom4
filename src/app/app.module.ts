@@ -16,6 +16,7 @@ import {ThemeModule} from "./@theme/theme.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {EfficiencyService} from "./@core/services/apis/efficiency.service";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -29,6 +30,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
