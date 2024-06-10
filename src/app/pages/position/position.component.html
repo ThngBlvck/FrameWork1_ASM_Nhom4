@@ -15,10 +15,8 @@
           <th scope="row">{{i + 1}}</th>
           <td>{{data.name}}</td>
           <td>
-            <a routerLink="/pages/Position/update/{{data.id}}">
-              <button type="submit" class="btn btn-outline-primary">Sửa</button>
-            </a>
-            <button type="submit" class="btn btn-outline-danger" (click)="deletePosition(data.id)">Xoá</button>
+            <button type="button" class="btn btn-outline-primary" >Sửa</button>
+            <button type="button" class="btn btn-outline-danger">Xoá</button>
           </td>
         </tr>
         </tbody>
@@ -26,4 +24,3 @@
     </nb-card-body>
   </nb-card>
 </div>
-

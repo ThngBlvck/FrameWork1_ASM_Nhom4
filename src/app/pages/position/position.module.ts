@@ -17,9 +17,9 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { PositionRoutingModule } from './position-routing.module';
 import { PositionComponent } from './position.component';
 import { AddComponent } from './add/add.component';
-import { FormsModule as ngFormsModule } from '@angular/forms';
-import { ListComponent } from './list/list.component';
+import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UpdateComponent } from './update/update.component';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
   imports: [
@@ -37,7 +37,8 @@ import { UpdateComponent } from './update/update.component';
     NbSelectModule,
     NbIconModule,
     ngFormsModule,
+    ReactiveFormsModule,
   ],
-  declarations: [PositionComponent, AddComponent, ListComponent, UpdateComponent],
+  declarations: [PositionComponent, AddComponent,  UpdateComponent, ListComponent],
 })
 export class PositionModule {}
