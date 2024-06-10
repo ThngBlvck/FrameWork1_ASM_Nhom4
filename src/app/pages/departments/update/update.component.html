@@ -4,13 +4,16 @@
       <nb-card>
         <nb-card-header>Phòng ban | Sửa</nb-card-header>
         <nb-card-body>
-          <form>
+          <form [formGroup]="editDepartment"  (ngSubmit)="saveUpdateDepartment()">
 
             <div class="form-group row py-1">
-              <label for="inputEmail1" class="label col-sm-3 col-form-label">Phòng ban</label>
+              <label for="name" class="label col-sm-3 col-form-label">Phòng ban</label>
               <div class="col-sm-9">
                 <div class="full-name-inputs">
-                  <input type="text" nbInput fullWidth placeholder="Nick">
+                  <input type="text" nbInput fullWidth id="name" name="name" formControlName="name">
+                  <small *ngIf="editDepartment.get('name').invalid && (editDepartment.get('name').dirty || editDepartment.get('name').touched)">
+                    <i class="text-danger">Vui long khong bo trong</i>
+                  </small>
                 </div>
               </div>
             </div>
