@@ -12,6 +12,8 @@ const PositionController = require("../controllers/PositionController");
 const SalaryController = require("../controllers/SalaryController");
 const CommunicationsController = require("../controllers/CommunicationController");
 
+const EfficiencyController = require("../controllers/EfficiencyController");
+
 
 router.get('/employee',EmployeeController.getEmployee);
 router.get('/employee/:id', EmployeeController.getEmployeeById);
@@ -47,5 +49,11 @@ router.get('communications/:id',CommunicationsController.getCommunicationsById);
 router.post('/communications', CommunicationsController.addCommunications);
 router.put('/communications/:id', CommunicationsController.updateCommunications);
 router.delete('/communications/:id', CommunicationsController.deleteCommunications);
+
+router.get('/efficiency', EfficiencyController.getAllEfficiency);
+router.get('/efficiency/:id', EfficiencyController.getOneEfficiency);
+router.post('/efficiency', EfficiencyController.creatEfficiency);
+router.delete('/efficiency/:id', EfficiencyController.deleteEfficiency);
+router.put('/efficiency/:id', EfficiencyController.updateEfficiency);
 
 module.exports = router;

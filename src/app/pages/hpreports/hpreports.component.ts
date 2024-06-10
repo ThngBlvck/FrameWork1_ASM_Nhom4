@@ -1,9 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EfficiencyService } from '../../@core/services/apis/efficiency.service';
 
 @Component({
   selector: 'app-hpreports',
-  template: '<router-outlet></router-outlet>',
+  templateUrl: './list.component.html',
 })
-export class HPreportsComponent {
+export class HPreportsComponent implements OnInit {
+  totalEmployees: number = 0;
+  employeesAchieved: number = 0;
+  employeesNotAchieved: number = 0;
 
+  constructor(private efficiencyService: EfficiencyService) {}
+
+  ngOnInit(): void {
+    this.efficiencyService.getAllData().subscribe(data => {
+      this.totalEmployees = data.getEmployees.data.length;
+      this.employeesAchieved = data.getEfficiencies.data.filter(eff => eff.progress === 2).length;
+      this.employeesNotAchieved = data.getEfficiencies.data.filter(eff => eff.progress === 1).length;
+    });
+  }
 }
