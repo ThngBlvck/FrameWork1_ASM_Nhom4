@@ -10,7 +10,7 @@ import {PositionInfoModel} from "../../position/position.component";
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit{
-  dataD: any;
+  dataD: DayoffInfoModel;
 
   constructor(
     private dayoff: DayoffService,

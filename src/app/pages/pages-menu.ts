@@ -41,7 +41,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Lịch nghĩ',
-    icon: 'person-outline',
+    icon: 'calendar',
     children: [
       {
         title: 'Thêm',
@@ -50,17 +50,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Danh sách',
         link: '/pages/Dayoff/list',
-      },
-      {
-        title: 'Sửa',
-        link: '/pages/Dayoff/update',
       }
-
     ]
   },
   {
     title: 'Chức vụ',
-    icon: 'person-outline',
+    icon: 'briefcase',
     children: [
       {
         title: 'Thêm',
