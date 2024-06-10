@@ -3,7 +3,7 @@ const multer = require('multer');
 
 exports.getDayoff = async (req, res, next) => {
   const dayoff = await DayoffModel.findAll({
-    attributes: ['id', 'name', 'reason', 'employee_id ']
+    attributes: ['id', 'name', 'reason', 'dayoff']
   });
   res.status(200).json({
     data: dayoff
@@ -13,7 +13,7 @@ exports.getDayoff = async (req, res, next) => {
 exports.getDayoffById = async (req, res, next) => {
   let id = req.params.id;
   const dayoff = await DayoffModel.findByPk(id, {
-    attributes: ['id', 'name', 'reason', 'employee_id ']
+    attributes: ['id', 'name', 'reason', 'dayoff']
   });
   res.status(200).json({
     dayoff: dayoff
@@ -36,10 +36,10 @@ exports.addDayoff = async (req, res, next) => {
     const dayoff = {
       name: req.body.name,
       reason: req.body.reason,
-      employee_id: req.body.employee_id
+      dayoff: req.body.dayoff
     }
 
-    const dayoffResponse = await DayoffModel.create(dayoff,{ fields: ['name', 'reason', 'employee_id ']})
+    const dayoffResponse = await DayoffModel.create(dayoff,{ fields: ['name', 'reason', 'dayoff']})
     res.status(201).json({
       message: 'Thêm ngày nghĩ thành công',
       dayoff: dayoffResponse
@@ -65,7 +65,7 @@ exports.updateDayoff = async (req, res) => {
 
     dayoff.name = req.body.name || dayoff.name;
     dayoff.reason = req.body.reason || dayoff.reason;
-    dayoff.employee_id = req.body.employee_id || dayoff.employee_id;
+    dayoff.dayoff = req.body.dayoff || dayoff.dayoff;
 
     await dayoff.save();
 

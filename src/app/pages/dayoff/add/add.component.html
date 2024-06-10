@@ -3,26 +3,25 @@
   <nb-card>
     <nb-card-header>Day Off</nb-card-header>
     <nb-card-body>
-      <form>
+      <form [formGroup]="addForm" (ngSubmit)="create()">
         <div class="form-group row py-1">
-          <label for="inputEmail1" class="label col-sm-3 col-form-label">Tên nhân viên</label>
+          <label for="name" class="label col-sm-3 col-form-label">Tên nhân viên</label>
           <div class="col-sm-9">
-            <input type="email" nbInput fullWidth id="inputEmail1" placeholder="Email">
+            <input type="text" nbInput fullWidth  formControlName="name" id="name" placeholder="Nhập tên nhân viên vào đây">
           </div>
         </div>
         <div class="form-group row py-1">
-          <label for="inputPassword2" class="label col-sm-3 col-form-label">Lí do</label>
+          <label for="reason" class="label col-sm-3 col-form-label">Lí do nghĩ</label>
           <div class="col-sm-9">
-            <input type="password" nbInput fullWidth id="inputPassword2" placeholder="Password">
+            <input type="text" nbInput fullWidth  formControlName="reason" id="reason" placeholder="Nhập lí do nghĩ vào đây">
           </div>
         </div>
         <div class="form-group row py-1">
-          <label class="col-sm-3 label">Ngày nghĩ</label>
+          <label class="col-sm-3 label"  for="dayoff">Ngày nghĩ</label>
           <div class="col-sm-9">
-            <input nbInput placeholder="Form Picker" [nbDatepicker]="formpicker">
+            <input nbInput placeholder="Nhập ngày nghĩ " id="dayoff" formControlName="dayoff" [nbDatepicker]="formpicker">
             <nb-datepicker #formpicker></nb-datepicker>
           </div>
-
         </div>
         <div class="form-group row py-1">
           <div class="offset-sm-3 col-sm-9">

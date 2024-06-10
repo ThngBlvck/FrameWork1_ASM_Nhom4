@@ -2,30 +2,38 @@
     <nb-card>
       <nb-card-header>Day Off</nb-card-header>
       <nb-card-body>
-        <form>
+        <form [formGroup]="updateDayoff"  (ngSubmit)="saveEditDayoff()">
           <div class="form-group row py-1">
-            <label for="inputEmail1" class="label col-sm-3 col-form-label">Tên nhân viên</label>
+            <label for="name" class="label col-sm-3 col-form-label">Tên nhân viên</label>
             <div class="col-sm-9">
-              <input type="email" nbInput fullWidth id="inputEmail1" placeholder="Email">
+              <input type="text" nbInput fullWidth id="name"  placeholder="Nhập nhân viên vào đây" formControlName="name">
+              <small *ngIf="updateDayoff.get('name').invalid && (updateDayoff.get('name').dirty || updateDayoff.get('name').touched)">
+                <i class="text-danger">Vui long khong bo trong</i>
+              </small>
             </div>
           </div>
           <div class="form-group row py-1">
-            <label for="inputPassword2" class="label col-sm-3 col-form-label">Lí do</label>
+            <label for="reason" class="label col-sm-3 col-form-label">Lí do</label>
             <div class="col-sm-9">
-              <input type="password" nbInput fullWidth id="inputPassword2" placeholder="Password">
+              <input type="text" nbInput fullWidth id="reason"  placeholder="Nhập lí do vào đây" formControlName="reason">
+              <small *ngIf="updateDayoff.get('reason').invalid && (updateDayoff.get('reason').dirty || updateDayoff.get('reason').touched)">
+                <i class="text-danger">Vui long khong bo trong</i>
+              </small>
             </div>
           </div>
           <div class="form-group row py-1">
-            <label class="col-sm-3 label">Ngày nghĩ</label>
+            <label class="col-sm-3 label"  for="dayoff">Ngày nghĩ</label>
             <div class="col-sm-9">
-              <input nbInput placeholder="Form Picker" [nbDatepicker]="formpicker">
+              <input nbInput placeholder="Chọn ngày nghĩ vào đây" id="dayoff" formControlName="dayoff"  [nbDatepicker]="formpicker">
+              <small *ngIf="updateDayoff.get('dayoff').invalid && (updateDayoff.get('dayoff').dirty || updateDayoff.get('dayoff').touched)">
+                <i class="text-danger">Vui long khong bo trong</i>
+              </small>
               <nb-datepicker #formpicker></nb-datepicker>
             </div>
-  
           </div>
           <div class="form-group row py-1">
             <div class="offset-sm-3 col-sm-9">
-              <button type="submit" nbButton status="primary">Sign in</button>
+              <button type="submit" nbButton status="primary">Xác nhận</button>
             </div>
           </div>
         </form>

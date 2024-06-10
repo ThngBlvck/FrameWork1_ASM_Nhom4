@@ -18,11 +18,7 @@ const Dayoff = sequelize.define('dayoff', {
   dayoff: {
     type: DataTypes.DATE,
     allowNull: true
-  },
-  employee_id : {
-    type: DataTypes.INTEGER,
-    allowNull: true
-  },
+  }
 }, {
   timestamps: false
 });
