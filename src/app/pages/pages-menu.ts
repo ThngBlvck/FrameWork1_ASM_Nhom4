@@ -84,10 +84,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Danh sách',
         link: '/pages/Employee/list',
-      },
-      {
-        title: 'Sửa',
-        link: '/pages/Employee/update',
       }
 
     ]
@@ -103,10 +99,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Danh sách',
         link: '/pages/Departments/list',
-      },
-      {
-        title: 'Sửa',
-        link: '/pages/Departments/update',
       }
 
     ]

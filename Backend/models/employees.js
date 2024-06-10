@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize  = require('./Database');
+const sequelize  = require('./database');
 
 const Employee = sequelize.define('employees', {
     id: {
@@ -9,14 +9,6 @@ const Employee = sequelize.define('employees', {
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: true
-    },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    phone: {
-        type: DataTypes.INTEGER,
         allowNull: true
     },
     position_id: {
