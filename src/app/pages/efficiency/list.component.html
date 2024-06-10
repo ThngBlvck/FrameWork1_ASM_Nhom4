@@ -1,0 +1,28 @@
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">ID Nhân Viên</th>
+    <th scope="col">Tên Nhân Viên</th>
+    <th scope="col">Số lượng công việc</th>
+    <th scope="col">Tiến độ hoàn thành</th>
+    <th scope="col">Tác vụ</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let u of combinedData; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{ u.employeeId }}</td>
+    <td>{{ u.employeeName }}</td>
+    <td>{{ u.job }}</td>
+    <td>{{ getProgressText(u.progress)}}</td>
+    <td>
+      <button type="button" class="btn btn-outline-primary" [routerLink]="['edit', u.id]" style="margin-right: 5px;">Sửa</button>
+      <button type="button" class="btn btn-outline-danger" (click)="deleteEfficiency(u.id)">Xoá</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<button type="button" class="btn btn-primary" [routerLink]="['add']">Thêm Hiệu Suất</button>
+
+

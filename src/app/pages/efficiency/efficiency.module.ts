@@ -15,9 +15,9 @@ import {
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { EfficiencyRoutingModule } from './efficiency-routing.module';
-import { EfficiencyComponent } from './efficiency.component';
 import { FormsModule as ngFormsModule } from '@angular/forms';
-import { ListComponent } from './list/list.component';
+import { UpdateComponent } from './update/update.component';
+import { AddComponent } from './add/add.component';
 
 @NgModule({
   imports: [
@@ -36,6 +36,9 @@ import { ListComponent } from './list/list.component';
     NbIconModule,
     ngFormsModule,
   ],
-  declarations: [EfficiencyComponent, ListComponent],
+  declarations: [
+    UpdateComponent,
+    AddComponent
+  ],
 })
 export class EfficiencyModule {}

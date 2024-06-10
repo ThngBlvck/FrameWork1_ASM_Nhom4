@@ -117,13 +117,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Danh Sách',
-        link: '/pages/Efficiency/list',
+        link: '/pages/Efficiency/',
       }
     ]
   },
   {
     title: 'Báo Cáo Nhân Sự',
     icon: 'person-outline',
-    link: '/pages/HPreports/list',
+    link: '/pages/HPreports',
   }
 ];

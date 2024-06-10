@@ -13,6 +13,8 @@ import {
 import {HttpClientModule} from "@angular/common/http";
 import {CoreModule} from "./@core/core.module";
 import {ThemeModule} from "./@theme/theme.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {EfficiencyService} from "./@core/services/apis/efficiency.service";
 
 
 @NgModule({
@@ -24,6 +26,8 @@ import {ThemeModule} from "./@theme/theme.module";
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
@@ -36,7 +40,7 @@ import {ThemeModule} from "./@theme/theme.module";
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
   ],
-  providers: [],
+  providers: [EfficiencyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
