@@ -17,7 +17,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { DayoffRoutingModule } from './dayoff-routing.module';
 import { DayoffComponent } from './dayoff.component';
 import { AddComponent } from './add/add.component';
-import { FormsModule as ngFormsModule } from '@angular/forms';
+import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ListComponent } from './list/list.component';
 import { UpdateComponent } from './update/update.component';
 
@@ -37,6 +37,7 @@ import { UpdateComponent } from './update/update.component';
     NbSelectModule,
     NbIconModule,
     ngFormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [DayoffComponent, AddComponent, ListComponent, UpdateComponent],
 })

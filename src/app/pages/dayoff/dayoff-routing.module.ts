@@ -22,14 +22,14 @@ const routes: Routes = [
           component: ListComponent,
         },
         {
-          path: 'update',
+          path: 'update/:id',
           component: UpdateComponent,
         }
-        
+
       ],
     },
   ];
-  
+
   @NgModule({
     imports: [
       RouterModule.forChild(routes),
