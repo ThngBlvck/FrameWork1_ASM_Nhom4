@@ -37,7 +37,7 @@ export class UpdateComponent  implements OnInit{
     });
   }
   saveEditDayoff() {
-    this.dayoff.updateDayoffs(this.id, this.updateDayoff.value).subscribe(res => {
+    this.dayoff.updateDayoff(this.id, this.updateDayoff.value).subscribe(res => {
       console.log(res);
       this.router.navigate(['/pages/Dayoff/list']);
     });
