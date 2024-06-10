@@ -70,10 +70,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Danh sách',
         link: '/pages/Position/list',
       },
-      {
-        title: 'Sửa',
-        link: '/pages/Position/update',
-      }
 
     ]
   },

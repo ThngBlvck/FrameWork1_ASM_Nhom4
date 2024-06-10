@@ -4,15 +4,14 @@ const multer = require('multer');
 const sequelize = require('sequelize');
 const mysql = require('mysql');
 const app = express();
-const port = 5000;
-const cors = require('cors');
+const port = 3000;
 var jsonParser = bodyParser.json();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'http://localhost:4200'
-  }));
+  origin: 'http://localhost:4200'
+}));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
