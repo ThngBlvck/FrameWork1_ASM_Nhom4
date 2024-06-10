@@ -10,17 +10,11 @@ var jsonParser = bodyParser.json();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.json());
-<<<<<<<<< Temporary merge branch 1
-app.use(cors({
-  origin: 'http://localhost:4200'
-}));
-=========
 
 app.use(cors({
   origin: 'http://localhost:4200'
 }));
 
->>>>>>>>> Temporary merge branch 2
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
