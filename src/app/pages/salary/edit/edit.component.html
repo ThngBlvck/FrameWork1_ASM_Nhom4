@@ -1,52 +1,31 @@
 <div class="container mt-4">
-    <div class="row mb-3">
-      <label for="employeeId" class="col-sm-3 col-form-label">Select Employee</label>
-      <div class="col-sm-9">
-        <select class="form-select" id="employeeId" (change)="selectEmployee($event.target.value)">
-          <option *ngFor="let employee of employees" [value]="employee.employeeId">
-            {{ employee.employeeName }}
-          </option>
-        </select>
-      </div>
-    </div>
-  </div>
-  
-  <div *ngIf="selectedEmployee" class="mt-4">
-    <div class="row py-1 w-25 ">
-      <label for="" class="label col-sm-3 col-form-label" >Iamges</label>
-      <div class="col-sm-12 text-center">
-        <img [src]="selectedEmployee.imageUrl" alt="{{selectedEmployee.employeeName}}" class="img-fluid w-25 h-auto">
-      </div>
-    </div>
-    <div class="row py-1">
-      <label for="employeeName" class="label col-sm-3 col-form-label">Employee Name</label>
-      <div class="col-sm-9">
-        <input type="text" nbInput fullWidth id="employeeName" [value]="selectedEmployee.employeeName">
-      </div>
-    </div>
-    <div class="row py-1">
-      <label for="employeeCode" class="label col-sm-3 col-form-label">Employee Code</label>
-      <div class="col-sm-9">
-        <input type="text" nbInput fullWidth id="employeeCode" [value]="selectedEmployee.employeeCode">
-      </div>
-    </div>
-    <div class="row py-1">
-      <label for="department" class="label col-sm-3 col-form-label">Department</label>
-      <div class="col-sm-9">
-        <input type="text" nbInput fullWidth id="department" [value]="selectedEmployee.department">
-      </div>
-    </div>
-    <div class="row py-1">
-      <label for="designation" class="label col-sm-3 col-form-label">Designation</label>
-      <div class="col-sm-9">
-        <input type="text" nbInput fullWidth id="designation" [value]="selectedEmployee.designation">
-      </div>
-    </div>
-    <div class="row py-1">
-      <label for="salary" class="label col-sm-3 col-form-label">Salary</label>
-      <div class="col-sm-9">
-        <input type="text" nbInput fullWidth id="salary" [value]="selectedEmployee.salary">
-      </div>
-    </div>
-  </div>
-  
+  <nb-card>
+    <nb-card-header>
+      <h3 class="text-center">Sửa Lương</h3>
+    </nb-card-header>
+    <nb-card-body>
+      <form [formGroup]="editForm" (ngSubmit)="updateSalary()">
+<!--        <div class="form-group">-->
+<!--          <label for="employee_id">Nhân Viên</label>-->
+<!--          <input type="text" class="form-control" id="employee_id"  [(ngModel)]="salary.employee_id"  formControlName="employee_id" disabled>-->
+<!--        </div>-->
+        <div class="form-group">
+          <label for="employee_id">Chọn Nhân Viên</label>
+          <select class="form-control" formControlName="employee_id" [(ngModel)]="salary.employee_id" id="employee_id" disabled>
+            <option *ngFor="let employee of employees" [value]="employee.id">
+              {{ employee.name }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="salary">Lương</label>
+          <input type="text" class="form-control" formControlName="salary" [(ngModel)]="salary.salary" id="salary" placeholder="Nhập lương">
+          <span class="text-danger" *ngIf="editForm.get('address')?.invalid && editForm.get('address')?.touched">không được bỏ trống lương</span>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary px-4" [disabled]="editForm.invalid">Cập Nhật</button>
+      </form>
+    </nb-card-body>
+  </nb-card>
+</div>

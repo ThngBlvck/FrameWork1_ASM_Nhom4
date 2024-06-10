@@ -21,11 +21,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Thêm Lương nhân viên',
         link: '/pages/Salary/add',
-      },
-      {
-        title: 'Sửa Lương nhân viên',
-        link: '/pages/Salary/edit',
-      },
+      }
 
     ],
   },
@@ -36,10 +32,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Danh sách thông tin nhân viên',
         link: '/pages/Communications/list',
-      },
-      {
-        title: 'Sửa thông tin nhân viên',
-        link: '/pages/Communications/edit',
       }, {
         title: 'Thêm thông tin nhân viên',
         link: '/pages/Communications/add',

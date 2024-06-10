@@ -17,9 +17,11 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { SalaryRoutingModule } from './salary-routing.module';
 import { SalaryComponent } from './salary.component';
 import { AddComponent } from './add/add.component';
-import { FormsModule as ngFormsModule } from '@angular/forms';
+import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms';
 import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
+import {SalaryService} from "../../@core/services/apis/salary.service";
+
 
 @NgModule({
   imports: [
@@ -37,6 +39,10 @@ import { ListComponent } from './list/list.component';
     NbSelectModule,
     NbIconModule,
     ngFormsModule,
+    ReactiveFormsModule,
+  ],
+  providers: [
+    SalaryService
   ],
   declarations: [SalaryComponent, AddComponent, EditComponent, ListComponent],
 })

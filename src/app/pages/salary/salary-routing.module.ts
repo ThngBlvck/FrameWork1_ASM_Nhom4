@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddComponent } from './add/add.component';
 import { SalaryComponent } from './salary.component';
 import { EditComponent } from './edit/edit.component';
-import { ListComponent } from './list/list.component';
+import {ListComponent} from "./list/list.component";
+
 
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
           component: AddComponent,
         },
         {
-          path: 'edit',
+          path: 'edit/:id',
           component: EditComponent,
         },
         {
@@ -27,7 +28,7 @@ const routes: Routes = [
       ],
     },
   ];
-  
+
   @NgModule({
     imports: [
       RouterModule.forChild(routes),

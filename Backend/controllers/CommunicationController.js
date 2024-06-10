@@ -3,7 +3,7 @@ const multer = require('multer');
 
 exports.getCommunications = async (req, res, next) => {
     const communications= await CommunicationsModel.findAll({
-        attributes: ['id', 'name', 'email', 'phone', 'address', 'employee_id']
+        attributes: ['id', 'email', 'phone', 'address', 'employee_id']
     });
         res.status(200).json({
             data: communications
@@ -13,7 +13,7 @@ exports.getCommunications = async (req, res, next) => {
 exports.getCommunicationsById = async (req, res, next) => {
     let id = req.params.id;
     const communications = await CommunicationsModel.findByPk(id, {
-        attributes: ['id', 'name', 'email', 'phone', 'address', 'employee_id']
+        attributes: ['id', 'email', 'phone', 'address', 'employee_id']
     });
         res.status(200).json({
             communications: communications
@@ -34,14 +34,13 @@ exports.deleteCommunications = async (req, res, next) => {
 exports.addCommunications = async (req, res, next) => {
     try {
         const communications = {
-            name: req.body.name,
             email: req.body.email,
             phone: req.body.phone,
             address: req.body.address,
             employee_id: req.body.employee_id
         }
 
-        const communicationsResponse = await CommunicationsModel.create(communications,{ fields: [ 'name', 'email', 'phone', 'address', 'employee_id']})
+        const communicationsResponse = await CommunicationsModel.create(communications,{ fields: [ 'email', 'phone', 'address', 'employee_id']})
             res.status(201).json({
                 message: 'Thêm thông tin nhân viên thành công',
                 communications: communicationsResponse
@@ -66,7 +65,6 @@ exports.updateCommunications = async (req, res) => {
             return res.status(404).json({ message: "Không tìm thấy thông nhân viên" });
         }
 
-        communications.name = req.body.name || communications.name;
         communications.email = req.body.email || communications.email;
         communications.phone = req.body.phone || communications.phone;
         communications.address = req.body.address || communications.address;

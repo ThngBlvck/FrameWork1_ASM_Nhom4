@@ -1,48 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { SalaryService } from '../../../@core/services/apis/salary.service';
+import { Iemployee } from '../../../@core/interfaces/employee';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss']
 })
-export class AddComponent {
-  employees: IEmployee[] = [
-    {
-      employeeId: 1,
-      employeeName: 'John Doe',
-      employeeCode: 'EMP-001',
-      department: 'HR',
-      designation: 'Manager',
-      salary: 50000,
-      imageUrl: 'https://cdn.pixabay.com/photo/2021/05/04/13/29/portrait-6228705_960_720.jpg',
-    },
-    {
-      employeeId: 2,
-      employeeName: 'Jane Smith',
-      employeeCode: 'EMP-002',
-      department: 'Finance',
-      designation: 'Accountant',
-      salary: 45000,
-      imageUrl: 'https://cdn.pixabay.com/photo/2021/05/04/13/29/portrait-6228705_960_720.jpg',
+export class AddComponent implements OnInit {
+  addForm: FormGroup;
+  employees: Iemployee[] = [];
 
-    },
-    
-  ];
-
-  selectedEmployee: IEmployee | undefined;
-
-  selectEmployee(employeeId: string): void {
-    const id = parseInt(employeeId, 10);
-    this.selectedEmployee = this.employees.find(employee => employee.employeeId === id);
+  constructor(
+    private fb: FormBuilder,
+    private salaryService: SalaryService,
+  private router: Router
+) {
+    // Khởi tạo form trong constructor
+    this.addForm = this.fb.group({
+      salary: [''],
+      employee_id: ['']
+    });
   }
-}
 
-interface IEmployee {
-  employeeId: number;
-  employeeName: string;
-  employeeCode: string;
-  department: string;
-  designation: string;
-  salary: number;
-  imageUrl: string;
+  ngOnInit(): void {
+    // Lấy dữ liệu nhân viên từ service và xử lý trả về
+    this.salaryService.getAllEmployee().subscribe(res => {
+      if (Array.isArray(res.data)) {
+        this.employees = res.data;
+      } else {
+        console.error('Expected an array of employees, but got:', res.data);
+      }
+    });
+    this.addForm = this.fb.group({
+
+      salary: ['', Validators.required],
+      employee_id: ['', Validators.required] //// Thêm trường employee_id vào FormGroup
+    });
+  }
+
+  create() {
+    // Gửi dữ liệu form lên server
+    this.salaryService.addSalaryIdx(this.addForm.value).subscribe(res => {
+      console.log(res);
+      // Chuyển hướng sau khi thêm thành công
+      this.router.navigate(['pages/Salary/list']); // Thay thế '/your-success-route' bằng đường dẫn bạn muốn chuyển đến
+    });
+  }
 }

@@ -35,25 +35,26 @@ exports.addSalary = async (req, res, next) => {
     try {
         const salary = {
             salary: req.body.salary,
-            employee_id	: req.body.employee_id	,
-           
+            employee_id: req.body.employee_id,
             
         }
 
-        const salaryResponse = await EmployeeModel.create(employee,{ fields: ['salary', 'employee_id']})
+        const salaryResponse = await SalaryModel.create(salary,{ fields: ['salary','employee_id']})
             res.status(201).json({
-                message: 'Thêm lương nhân viên thành công',
+                message: 'Thêm nhân viên thành công',
                 salary: salaryResponse
             })
 
 
     } catch (error) {
-        console.error("Lỗi khi tạo lương nhân viên:", error);
+        console.error("Lỗi khi tạo nhân viên:", error);
         res.status(500).json({
             message: "Đã xảy ra lỗi khi tạo nhân viên"
         });
     }
 };
+
+
 
 exports.updateSalary = async (req, res) => {
     try {

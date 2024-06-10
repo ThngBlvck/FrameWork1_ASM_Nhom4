@@ -1,59 +1,78 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { Salary } from 'app/@core/interfaces/salary';
+import { SalaryService } from 'app/@core/services/apis/salary.service';
+import { Iemployee } from 'app/@core/interfaces/employee';
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-  constructor(private router: Router) {}
-  editEmployee(employeeId: number) {
-    this.router.navigate(['pages/Salary/edit', employeeId]);
-  }
-  employees: IEmployee[] = [
-    {
-      employeeId: 1,
-      employeeName: 'John Doe',
-      employeeCode: 'EMP-001',
-      department: 'HR',
-      designation: 'Manager',
-      salary: 50000,
-      imageUrl:
-        'https://cdn.pixabay.com/photo/2021/05/04/13/29/portrait-6228705_960_720.jpg',
-    },
-    {
-      employeeId: 2,
-      employeeName: 'Jane Smith',
-      employeeCode: 'EMP-002',
-      department: 'Finance',
-      designation: 'Accountant',
-      salary: 45000,
-      imageUrl:
-        'https://cdn.pixabay.com/photo/2021/05/04/13/29/portrait-6228705_960_720.jpg',
-    },
-  ];
+  listEmployees: Iemployee[] = [];
+  listSalary: Salary[] = [];
+  combineData : any[];
+  constructor( private salaryService: SalaryService,
+               private router: Router
+  ) {
 
-  selectedEmployee: IEmployee | undefined;
+  }
+
 
   ngOnInit(): void {
-    // Select the first employee when the component initializes
-    this.selectEmployee(this.employees[0].employeeId.toString());
+    this.getSalary();
+    this.getEmployee();
+  }
+  getSalary(): void {
+    this.salaryService.getAllSalary().subscribe(res => {
+      console.log(res.data);
+      this.listSalary = res.data;
+      this.combineDatas()
+    });
+  }
+  getEmployee(): void {
+    this.salaryService.getAllEmployee().subscribe(res => {
+      console.log(res.data);
+      this.listEmployees = res.data;
+      this.combineDatas();
+    });
+  }
+  combineDatas(): void {
+    if (this.listSalary.length > 0 && this.listEmployees.length > 0) {
+      this.combineData = this.listSalary.map(salary => {
+        return {
+          ...salary,
+          employeeName: this.listEmployees.find(cat => cat.id === salary.employee_id)?.name,
+          employeeId: this.listEmployees.find(cat => cat.id === salary.employee_id)?.id
+        };
+      });
+    }
   }
 
-  selectEmployee(employeeId: string): void {
-    const id = parseInt(employeeId, 10);
-    this.selectedEmployee = this.employees.find(
-      (employee) => employee.employeeId === id
+  deleteSalary(id: number): void {
+    this.salaryService.deleteSalary(id).subscribe(
+      res => {
+        console.log('Deleted successfully');
+        this.combineData = this.combineData.filter(salary => salary.id !== id);
+      },
+      err => {
+        console.error('Error deleting salary:', err);
+      }
     );
   }
-}
-interface IEmployee {
-  employeeId: number;
-  employeeName: string;
-  employeeCode: string;
-  department: string;
-  designation: string;
-  salary: number;
-  imageUrl: string;
+  editSalary(salaryId: number): void {
+    this.router.navigate(['pages/Salary/edit', salaryId]);
+  }
+  confirmDelete(id: number): void {
+    const confirmDelete = confirm('Bạn có chắc chắn muốn xoá?');
+    if (confirmDelete) {
+      // Gọi hàm xử lý xoá
+      this.deleteSalary(id);
+    } else {
+      // Không làm gì cả
+    }
+  }
+
+
+
 }

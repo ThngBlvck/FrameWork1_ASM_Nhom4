@@ -17,9 +17,10 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { CommunicationsRoutingModule } from './communications-routing.module';
 import { CommunicationsComponent } from './communications.component';
 import { AddComponent } from './add/add.component';
-import { FormsModule as ngFormsModule } from '@angular/forms';
-import { ListComponent } from './list/list.component';
+import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms';
+
 import { EditComponent } from './edit/edit.component';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { EditComponent } from './edit/edit.component';
     NbSelectModule,
     NbIconModule,
     ngFormsModule,
+    ReactiveFormsModule,
   ],
-  declarations: [CommunicationsComponent, AddComponent, ListComponent, EditComponent],
+  declarations: [CommunicationsComponent, AddComponent, EditComponent, ListComponent],
 })
 export class CommunicationsModule {}

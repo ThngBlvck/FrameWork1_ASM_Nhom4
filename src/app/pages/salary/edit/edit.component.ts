@@ -1,48 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SalaryService } from '../../../@core/services/apis/salary.service';
+import { Iemployee } from '../../../@core/interfaces/employee';
+import { Salary } from '../../../@core/interfaces/salary';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditComponent {
-  employees: IEmployee[] = [
-    {
-      employeeId: 1,
-      employeeName: 'John Doe',
-      employeeCode: 'EMP-001',
-      department: 'HR',
-      designation: 'Manager',
-      salary: 50000,
-      imageUrl: 'https://cdn.pixabay.com/photo/2021/05/04/13/29/portrait-6228705_960_720.jpg',
-    },
-    {
-      employeeId: 2,
-      employeeName: 'Jane Smith',
-      employeeCode: 'EMP-002',
-      department: 'Finance',
-      designation: 'Accountant',
-      salary: 45000,
-      imageUrl: 'https://cdn.pixabay.com/photo/2021/05/04/13/29/portrait-6228705_960_720.jpg',
-
-    },
-    
-  ];
-
-  selectedEmployee: IEmployee | undefined;
-
-  selectEmployee(employeeId: string): void {
-    const id = parseInt(employeeId, 10);
-    this.selectedEmployee = this.employees.find(employee => employee.employeeId === id);
+export class EditComponent implements OnInit {
+  editForm: FormGroup;
+  employees: Iemployee[] = [];
+  salaryId: number;
+  loading = false;
+  salary : Salary;
+  constructor(
+    private fb: FormBuilder,
+    private salaryService: SalaryService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.editForm = this.fb.group({
+      employee_id: ['', Validators.required],
+      salary: ['', Validators.required]
+    });
   }
-}
 
-interface IEmployee {
-  employeeId: number;
-  employeeName: string;
-  employeeCode: string;
-  department: string;
-  designation: string;
-  salary: number;
-  imageUrl: string;
+  ngOnInit(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.salaryService.getAllSalary().subscribe(
+      res => {
+        this.salary = res.data.find(salarry => salarry.id === id);
+      }
+    );
+  }
+
+  updateSalary(): void {
+    this.salaryService.updateSalary(this.salary.id, this.salary).subscribe(
+      res => {
+        console.log('Updated successfully');
+        this.router.navigate(['/pages/Salary/list']);
+      }
+    );
+  }
+
 }

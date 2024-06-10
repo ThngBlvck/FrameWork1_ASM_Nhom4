@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Iemployee} from "../../../@core/interfaces/employee";
+import {CTions} from "../../../@core/interfaces/communications";
+import {SalaryService} from "../../../@core/services/apis/salary.service";
+import {CommunicationsService} from "../../../@core/services/apis/communications.service";
 
 @Component({
   selector: 'app-edit',
@@ -7,50 +12,39 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./edit.component.scss']
 })
 export class EditComponent {
-  [x: string]: any;
-  employees: Employee[] = [
-    {
-      id: 1,
-      fullName: "Nguyễn Văn A",
-      email: "nguyenvana@example.com",
-      phoneNumber: "0123456789",
-      permanentAddress: "123 Đường ABC, Quận XYZ, Thành phố HCM"
-    },
-    {
-      id: 2,
-      fullName: "Trần Thị B",
-      email: "tranthib@example.com",
-      phoneNumber: "0987654321",
-      permanentAddress: "456 Đường XYZ, Quận ABC, Thành phố HCM",
-      temporaryAddress: "789 Đường DEF, Quận UVW, Thành phố HCM"
-    }
-  ];
-
-  isNew: boolean = true;
-  employee: any;
-
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  editForm: FormGroup;
+  employees: Iemployee[] = [];
+  ction : CTions
+  constructor(
+    private fb: FormBuilder,
+    private communicationsService: CommunicationsService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.editForm = this.fb.group({
+      employee_id: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern('[0-9]+'), Validators.minLength(10)]],
+      address: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      if (params['id']) {
-        // Nếu có ID được truyền qua tham số, là chế độ chỉnh sửa
-        this.isNew = false;
-        // Tải thông tin nhân viên từ service hoặc bất kỳ nguồn dữ liệu nào khác dựa trên ID
-        const employeeId = +params['id']; // Chuyển đổi id từ string sang number
-        // Giả sử bạn có một service tải thông tin nhân viên từ server
-        // this.employee = this.employeeService.getEmployeeById(employeeId);
-        // Trong trường hợp này, dữ liệu được giả định từ một nguồn dữ liệu giả định:
-        this.employee = this.getEmployeeByIdFromMockData(employeeId);
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.communicationsService.getAllCommunications().subscribe(
+      res => {
+        this.ction = res.data.find(ction => ction.id === id);
       }
-    });
+    );
+  }
+
+  updateCommunications(): void {
+    this.communicationsService.updateCommunications(this.ction.id, this.ction).subscribe(
+      res => {
+        console.log('Updated successfully');
+        this.router.navigate(['pages/Communications/list']);
+      }
+    );
+  }
 }
-}
-interface Employee {
-  id:number;
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  permanentAddress: string;
-  temporaryAddress?: string;
-}
+
