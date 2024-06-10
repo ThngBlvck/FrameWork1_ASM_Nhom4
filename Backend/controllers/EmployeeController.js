@@ -3,7 +3,7 @@ const multer = require('multer');
 
 exports.getEmployee = async (req, res, next) => {
     const employee = await EmployeeModel.findAll({
-        attributes: ['id', 'name', 'email', 'phone', 'position_id', 'department_id']
+        attributes: ['id', 'name', 'position_id', 'department_id']
     });
         res.status(200).json({
             data: employee
@@ -35,13 +35,11 @@ exports.addEmployee = async (req, res, next) => {
     try {
         const employee = {
             name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
             position_id: req.body.position_id,
             department_id: req.body.department_id
         }
 
-        const employeeResponse = await EmployeeModel.create(employee,{ fields: ['name', 'email', 'phone', 'position_id', 'department_id']})
+        const employeeResponse = await EmployeeModel.create(employee,{ fields: ['name', 'position_id', 'department_id']})
             res.status(201).json({
                 message: 'Thêm nhân viên thành công',
                 employee: employeeResponse
@@ -67,8 +65,6 @@ exports.updateEmployee = async (req, res) => {
         }
 
         employee.name = req.body.name || employee.name;
-        employee.email = req.body.email || employee.email;
-        employee.phone = req.body.phone || employee.phone;
         employee.position_id = req.body.position_id || employee.position_id;
         employee.department_id = req.body.department_id || employee.department_id;
 

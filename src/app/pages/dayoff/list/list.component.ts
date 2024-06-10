@@ -28,7 +28,7 @@ export class ListComponent implements OnInit{
   }
   deleteDayoff(id: DayoffInfoModel){
     this.dayoff.deleteDayoff(id).subscribe(res => {
-      console.log(res);
+      console.log(res.data);
       this.router.navigate(['/pages/Dayoff/list']);
     })
   }
