@@ -33,7 +33,7 @@ export class ListComponent implements OnInit{
   deletePosition(id: PositionInfoModel){
     this.position.deletePositions(id).subscribe(res => {
       console.log(res);
-      this.router.navigate(['/pages/Position/list']);
+      //this.router.navigate(['/pages','Position','list']);
 
     })
   }
