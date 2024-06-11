@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 // import {PositionService} from "../../../@core/services/apis/position.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DayoffService} from "../../../@core/services/apis/Dayoff.service";
@@ -18,9 +18,9 @@ export class AddComponent  implements OnInit{
   }
   ngOnInit(): void {
     this.addForm = new FormGroup({
-      name: new FormControl(''),
-      reason: new FormControl(''),
-      dayoff: new FormControl('')
+      name: new FormControl('',Validators.required),
+      reason: new FormControl('',Validators.required),
+      dayoff: new FormControl('',Validators.required)
 
     });
   }

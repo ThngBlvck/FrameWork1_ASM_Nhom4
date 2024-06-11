@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {PositionService} from "../../../@core/services/apis/position.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -17,7 +17,7 @@ export class AddComponent implements OnInit{
   }
   ngOnInit(): void {
     this.addForm = new FormGroup({
-      name: new FormControl(''),
+      name: new FormControl('',Validators.required),
     });
   }
   create() {

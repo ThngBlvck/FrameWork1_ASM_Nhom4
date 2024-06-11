@@ -7,6 +7,9 @@
             <label for="name" class="label col-sm-3 col-form-label">Chức vụ</label>
             <div class="col-sm-9">
               <input type="text" nbInput fullWidth  formControlName="name" id="name" placeholder="Nhập chức vụ vào đây">
+              <small *ngIf="addForm.get('name').invalid && (addForm.get('name').dirty || addForm.get('name').touched)">
+                <i class="text-danger">Vui lòng không bỏ trống</i>
+              </small>
             </div>
           </div>
           <div class="form-group row py-1">

@@ -8,7 +8,7 @@
             <div class="col-sm-9">
               <input type="text" nbInput fullWidth id="name"  placeholder="Nhập nhân viên vào đây" formControlName="name">
               <small *ngIf="updateDayoff.get('name').invalid && (updateDayoff.get('name').dirty || updateDayoff.get('name').touched)">
-                <i class="text-danger">Vui long khong bo trong</i>
+                <i class="text-danger">Vui lòng không bỏ trống tên nhân viên</i>
               </small>
             </div>
           </div>
@@ -17,7 +17,7 @@
             <div class="col-sm-9">
               <input type="text" nbInput fullWidth id="reason"  placeholder="Nhập lí do vào đây" formControlName="reason">
               <small *ngIf="updateDayoff.get('reason').invalid && (updateDayoff.get('reason').dirty || updateDayoff.get('reason').touched)">
-                <i class="text-danger">Vui long khong bo trong</i>
+                <i class="text-danger">Vui lòng không bỏ trống lí do</i>
               </small>
             </div>
           </div>
@@ -26,7 +26,7 @@
             <div class="col-sm-9">
               <input nbInput placeholder="Chọn ngày nghĩ vào đây" id="dayoff" formControlName="dayoff"  [nbDatepicker]="formpicker">
               <small *ngIf="updateDayoff.get('dayoff').invalid && (updateDayoff.get('dayoff').dirty || updateDayoff.get('dayoff').touched)">
-                <i class="text-danger">Vui long khong bo trong</i>
+                <i class="text-danger">Vui lòng không bỏ trống ngày nghĩ</i>
               </small>
               <nb-datepicker #formpicker></nb-datepicker>
             </div>
