@@ -12,7 +12,7 @@
                   <nb-option *ngFor="let department of departments" value="{{ department.id }}">{{ department.name }}</nb-option>
                 </nb-select>
                 <small *ngIf="editEmployee.get('department_id').invalid && (editEmployee.get('department_id').dirty || editEmployee.get('department_id').touched)">
-                  <i class="text-danger">Vui long khong bo trong</i>
+                  <i class="text-danger">Vui lòng không bỏ trống !!!</i>
                 </small>
               </div>
             </div>
@@ -24,7 +24,7 @@
                   <nb-option *ngFor="let position of positions" value="{{ position.id }}">{{ position.name }}</nb-option>
                 </nb-select>
                 <small *ngIf="editEmployee.get('position_id').invalid && (editEmployee.get('position_id').dirty || editEmployee.get('position_id').touched)">
-                  <i class="text-danger">Vui long khong bo trong</i>
+                  <i class="text-danger">Vui lòng không bỏ trống !!!</i>
                 </small>
               </div>
             </div>
@@ -37,7 +37,7 @@
                 <div class="full-name-inputs">
                   <input type="text" nbInput fullWidth id="name" placeholder="Họ và tên" name="name" formControlName="name">
                   <small *ngIf="editEmployee.get('name').invalid && (editEmployee.get('name').dirty || editEmployee.get('name').touched)">
-                    <i class="text-danger">Vui long khong bo trong</i>
+                    <i class="text-danger">Vui lòng không bỏ trống !!!</i>
                   </small>
                 </div>
               </div>

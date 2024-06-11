@@ -18,7 +18,9 @@
       <a routerLink="/pages/Employee/update/{{e.id}}">
         <button type="submit" class="btn btn-outline-primary" style="margin-right: 5px;">Sửa</button>
       </a>
-      <button type="submit" class="btn btn-outline-danger" (click)="delete(e.id)">Xoá</button>
+      <a routerLink="/pages/Employee/delete/{{e.id}}">
+        <button type="submit" class="btn btn-outline-danger" (click)="delete(e.id)">Xoá</button>
+      </a>
     </td>
   </tr>
   </tbody>

@@ -25,7 +25,7 @@ export class AddComponent implements OnInit{
     private router: Router,
     // private PositionService: PositionService,
   ) {
-    
+
   }
 
   getAllDepartment(){
@@ -48,9 +48,9 @@ export class AddComponent implements OnInit{
     this.getAllDepartment();
     this.getAllPositon();
     this.addForm = new FormGroup({
-      name: new FormControl(''),
-      department_id: new FormControl(''),
-      position_id: new FormControl('')
+      name: new FormControl('',Validators.required),
+      department_id: new FormControl('',Validators.required),
+      position_id: new FormControl('',Validators.required)
     });
 
   }
@@ -59,7 +59,7 @@ export class AddComponent implements OnInit{
     this.EmployeeService.postEmployee(this.addForm.value).subscribe(res => {
       console.log(res);
       this.router.navigate(['/pages/Employee/list']);
-  
+
     })
   }
 }
