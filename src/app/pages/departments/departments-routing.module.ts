@@ -24,6 +24,10 @@ const routes: Routes = [
         path: 'list',
         component: ListComponent,
       },
+      {
+        path: 'delete/:id',
+        component: ListComponent,
+      },
 
     ],
   },

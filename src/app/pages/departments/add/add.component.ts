@@ -1,7 +1,7 @@
 import { DepartmentService } from 'app/@core/services/apis/department.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-add',
@@ -19,7 +19,7 @@ export class AddComponent implements OnInit{
 
   ngOnInit(): void {
     this.addForm = new FormGroup({
-      name: new FormControl(''),
+      name: new FormControl('',Validators.required),
     });
   }
 

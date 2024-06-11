@@ -30,6 +30,9 @@
               <div class="col-sm-9">
                 <div class="full-name-inputs">
                   <input type="text" nbInput fullWidth placeholder="" name="name" formControlName="name">
+                  <small *ngIf="addForm.get('name').invalid && (addForm.get('name').dirty || addForm.get('name').touched)">
+                    <i class="text-danger">Vui lòng không bỏ trống !!!</i>
+                  </small>
                 </div>
               </div>
             </div>
