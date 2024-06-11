@@ -16,8 +16,8 @@
 
         <div class="form-group">
           <label for="salary">Lương</label>
-          <input type="text" class="form-control" formControlName="salary" id="salary" placeholder="Nhập lương">
-          <span class="text-danger" *ngIf="addForm.get('salary')?.invalid && addForm.get('salary')?.touched">Địa chỉ không được bỏ trống</span>
+          <input type="number" min="0" class="form-control" formControlName="salary" id="salary" placeholder="Nhập lương">
+          <span class="text-danger" *ngIf="addForm.get('salary')?.invalid && addForm.get('salary')?.touched">Lương không được bỏ trống hoặc âm</span>
         </div>
 
         <button type="submit" class="btn btn-success px-4" [disabled]="addForm.invalid">Thêm</button>
