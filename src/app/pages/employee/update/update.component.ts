@@ -15,8 +15,8 @@ import { PositionInfoModel, PositionService } from 'app/@core/services/apis/posi
 export class UpdateComponent implements OnInit{
   editEmployee: FormGroup;
   EmployeeById: EmployeeModel;
-  departments: DepartmentModel[] = [];
-  positions: PositionInfoModel[] = [];
+  departments: DepartmentModel[];
+  positions: PositionInfoModel[];
   id = this.route.snapshot.params['id'];
 
   constructor(
@@ -28,27 +28,32 @@ export class UpdateComponent implements OnInit{
 
   }
 
-  getAllDepartment(){
-    this.DepartmentService.getAllDepartment().subscribe(res =>{
-      this.departments = res.data;
-      console.log(this.departments);
-    })
-  }
 
-  getAllPosition(){
-    this.PositionService.getAllPosition().subscribe(res =>{
-      this.positions = res.data;
-      console.log(this.positions);
-    })
-  }
 
-  ngOnInit(){
+
+
+  ngOnInit(): void {
     this.editEmployee = new FormGroup({
       name: new FormControl('',Validators.required),
       department_id: new FormControl('',Validators.required),
       position_id: new FormControl('',Validators.required),
     });
     this.updateEmployee(this.id);
+    this.getAllPosition();
+    this.getAllDepartment();
+  }
+  getAllPosition(){
+    this.PositionService.getAllPositon().subscribe(res =>{
+      this.positions = res.data;
+      console.log(this.positions);
+    })
+  }
+
+  getAllDepartment(){
+    this.DepartmentService.getAllDepartment().subscribe(res =>{
+      this.departments = res.data;
+      console.log(this.departments);
+    })
   }
 
   updateEmployee(id: number) {
@@ -65,4 +70,6 @@ export class UpdateComponent implements OnInit{
       this.router.navigate(['/pages/Employee/list']);
     });
   }
+
+
 }
