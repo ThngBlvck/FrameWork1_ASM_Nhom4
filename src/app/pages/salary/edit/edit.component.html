@@ -20,7 +20,19 @@
         <div class="form-group">
           <label for="salary">Lương</label>
           <input type="text" class="form-control" formControlName="salary" [(ngModel)]="salary.salary" id="salary" placeholder="Nhập lương">
-          <span class="text-danger" *ngIf="editForm.get('address')?.invalid && editForm.get('address')?.touched">không được bỏ trống lương</span>
+          <span class="text-danger" *ngIf="editForm.get('salary')?.invalid && editForm.get('salary')?.touched">không được bỏ trống lương</span>
+
+        </div>
+        <div class="form-group">
+          <label for="salarycong">Lương Thưởng</label>
+          <input type="text" class="form-control" formControlName="salarycong" [(ngModel)]="salary.salarycong" id="salarycong" placeholder="Nhập lương cộng">
+          <span class="text-danger" *ngIf="editForm.get('salarycong')?.invalid && editForm.get('salarycong')?.touched">không được bỏ trống lương</span>
+
+        </div>
+        <div class="form-group">
+          <label for="salarytru">Lương Trừ</label>
+          <input type="text" class="form-control" formControlName="salarytru" [(ngModel)]="salary.salarytru" id="salarytru" placeholder="Nhập lương">
+          <span class="text-danger" *ngIf="editForm.get('salarytru')?.invalid && editForm.get('salarytru')?.touched">không được bỏ trống lương</span>
 
         </div>
 

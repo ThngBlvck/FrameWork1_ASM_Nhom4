@@ -20,7 +20,8 @@ export class SalaryService {
   ) { }
 
   getAllSalary(): Observable<any> {
-    return this.http.get('http://127.0.0.1:5000/api/salary');
+    const url = `${this.apiUrl}`;
+    return this.http.get(url);
   }
   getSalaryById(id: number): Observable<Salary> {
     const url = `${this.apiUrl}/${id}`;
@@ -30,10 +31,12 @@ export class SalaryService {
     return this.http.get('http://127.0.0.1:5000/api/employee');
   }
   addSalaryIdx(add: Salary): Observable<any> {
-    return this.http.post('http://127.0.0.1:5000/api/salary', add);
+    const url = `${this.apiUrl}`;
+    return this.http.post(url, add);
   }
   deleteSalary(id: number): Observable<any> {
-    return this.http.delete(`http://127.0.0.1:5000/api/salary/${id}`);
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete(url);
   }
 
   updateSalary(id: number, salary: Salary): Observable<any> {
