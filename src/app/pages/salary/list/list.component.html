@@ -11,6 +11,8 @@
             <th scope="col">#</th>
             <th scope="col">Họ và tên</th>
             <th scope="col">Lương</th>
+            <th scope="col">Lương Thưởng</th>
+            <th scope="col">Lương Trừ</th>
             <th scope="col">Hành động</th>
           </tr>
           </thead>
@@ -19,6 +21,8 @@
             <th scope="row">{{ i + 1 }}</th>
             <td>{{ s.employeeName }}</td>
             <td>{{ s.salary | number:'1.2-2' }} VNĐ</td>
+            <td>{{ s.salarycong | number:'1.2-2' }} VNĐ</td>
+            <td>{{ s.salarytru | number:'1.2-2' }} VNĐ</td>
             <td>
               <button type="button" class="btn btn-outline-primary btn-sm py-1" style="margin-right: 5px;" (click)="editSalary(s.id)">Sửa</button>
               <button type="button" class="btn btn-outline-danger btn-sm" (click)="confirmDelete(s.id)">Xoá</button>

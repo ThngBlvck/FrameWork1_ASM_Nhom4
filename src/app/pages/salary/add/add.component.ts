@@ -37,6 +37,8 @@ export class AddComponent implements OnInit {
     this.addForm = this.fb.group({
 
       salary: ['', Validators.required],
+      salarycong: ['', Validators.required],
+      salarytru: ['', Validators.required],
       employee_id: ['', Validators.required] //// Thêm trường employee_id vào FormGroup
     });
   }

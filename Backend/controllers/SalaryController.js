@@ -3,7 +3,7 @@ const multer = require('multer');
 
 exports.getSalary = async (req, res, next) => {
     const salary = await SalaryModel.findAll({
-        attributes: ['id', 'salary','employee_id']
+        attributes: ['id', 'salary','salarycong','salarytru','employee_id']
     });
         res.status(200).json({
             data: salary
@@ -13,7 +13,7 @@ exports.getSalary = async (req, res, next) => {
 exports.getSalaryById = async (req, res, next) => {
     let id = req.params.id;
     const salary = await SalaryModel.findByPk(id, {
-        attributes: ['id', 'salary','employee_id']
+        attributes: ['id', 'salary','salarycong','salarytru','employee_id']
     });
         res.status(200).json({
             salary: salary
@@ -35,11 +35,13 @@ exports.addSalary = async (req, res, next) => {
     try {
         const salary = {
             salary: req.body.salary,
+          salarycong: req.body.salarycong,
+          salarytru: req.body.salarytru,
             employee_id: req.body.employee_id,
-            
+
         }
 
-        const salaryResponse = await SalaryModel.create(salary,{ fields: ['salary','employee_id']})
+        const salaryResponse = await SalaryModel.create(salary,{ fields: ['salary','salarycong','salarytru','employee_id']})
             res.status(201).json({
                 message: 'Thêm nhân viên thành công',
                 salary: salaryResponse
@@ -67,8 +69,10 @@ exports.updateSalary = async (req, res) => {
         }
 
         salary.salary = req.body.salary || salary.salary;
+      salary.salarycong = req.body.salarycong || salary.salarycong;
+      salary.salarytru = req.body.salarytru || salary.salarytru;
         salary.employee_id = req.body.employee_id || salary.employee_id;
-       
+
 
         await salary.save();
 

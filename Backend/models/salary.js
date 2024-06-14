@@ -13,6 +13,14 @@ const Salary = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    salarycong: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    salarytru: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     employee_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
