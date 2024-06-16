@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {PositionService} from "../../../@core/services/apis/position.service";
 import {PositionInfoModel} from "../position.component";
 import { ActivatedRoute, Router } from '@angular/router';
+import {NbDialogService, NbToastrService} from "@nebular/theme";
+import {DeleteComponent} from "../delete/delete.component";
 
 @Component({
   selector: 'app-list',
@@ -16,8 +18,9 @@ export class ListComponent implements OnInit{
     private http: HttpClient,
     private position: PositionService,
     private route: ActivatedRoute,
-    private router: Router
-
+    private router: Router,
+  private dialogService: NbDialogService,
+  private toastrService: NbToastrService,
   ) {
   }
   ngOnInit(): void {
@@ -30,11 +33,20 @@ export class ListComponent implements OnInit{
       console.log(this.dataP);
     })
   }
-  deletePosition(id: PositionInfoModel){
-    this.position.deletePositions(id).subscribe(res => {
-      console.log(res);
-      //this.router.navigate(['/pages','Position','list']);
-
-    })
+  deletePosition(id: PositionInfoModel) {
+    this.dialogService.open(DeleteComponent)
+      .onClose.subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.position.deletePositions(id).subscribe({
+          next: res => {
+            this.toastrService.show('Xóa chức vụ thành công!', 'Thành công', { status: 'success' });
+            this.getAllPosition();
+          },
+          error: err => {
+            this.toastrService.show('Xóa chức vụ thất bại. Vui lòng thử lại.', 'Lỗi', { status: 'danger' });
+          }
+        });
+      }
+    });
   }
 }
