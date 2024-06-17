@@ -28,7 +28,7 @@
               <small *ngIf="updateDayoff.get('dayoff').invalid && (updateDayoff.get('dayoff').dirty || updateDayoff.get('dayoff').touched)">
                 <i class="text-danger">Vui lòng không bỏ trống ngày nghĩ</i>
               </small>
-
+              <nb-datepicker #formpicker></nb-datepicker>
             </div>
           </div>
           <div class="form-group row py-1">
