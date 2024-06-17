@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DayoffInfoModel} from "../dayoff.component";
 import {DayoffService} from "../../../@core/services/apis/Dayoff.service";
 import {PositionInfoModel} from "../../position/position.component";
+import {NbToastrService} from "@nebular/theme";
 
 @Component({
   selector: 'app-update',
@@ -18,7 +19,8 @@ export class UpdateComponent  implements OnInit{
   constructor(
     private dayoff: DayoffService,
     private route: ActivatedRoute,
-    private router: Router ) {
+    private router: Router,
+    private toastrService: NbToastrService) {
 
   }
   ngOnInit(){
@@ -38,16 +40,17 @@ export class UpdateComponent  implements OnInit{
     });
   }
   saveEditDayoff() {
-    this.dayoff.updateDayoff(this.id, this.updateDayoff.value).subscribe(res => {
-      console.log(res);
-      this.router.navigate(['/pages/Dayoff/list']);
-    });
+    if (this.updateDayoff.valid) {
+      this.dayoff.updateDayoff(this.id, this.updateDayoff.value).subscribe((res) => {
+          this.handleSaveSuccess(res);
+        },
+      );
+    }
   }
-  deleteDayoff(id: DayoffInfoModel){
-    this.dayoff.deleteDayoff(id).subscribe(res => {
-      console.log(res);
-      this.router.navigate(['/pages/Dayoff/list']);
-
-    })
+  handleSaveSuccess(res: any) {
+    this.toastrService.success('Cập nhật ngày nghĩ thành công!', 'Thành công');
+    this.router.navigate(['/pages/Dayoff/list']).then();
+    console.log(res);
   }
 }
+

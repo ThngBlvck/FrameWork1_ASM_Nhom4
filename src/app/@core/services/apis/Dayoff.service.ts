@@ -12,11 +12,12 @@ export interface DayoffInfoModel {
   providedIn: 'root'
 })
 export class DayoffService {
+  API_URL = 'http://127.0.0.1:5000/api/dayoff';
   [x: string]: any;
   constructor(private http: HttpClient) {}
 
   getAllDayoffs(): Observable<any> {
-    return this.http.get('http://127.0.0.1:5000/api/dayoff');
+    return this.http.get(`${this.API_URL}`);
   }
   // getUnit():Observable<any>{
   //   return this.http.get('http://127.0.0.1:3000/api/position',{
@@ -24,25 +25,19 @@ export class DayoffService {
   //   })
   // }
   addDayoff(add: DayoffInfoModel): Observable<any> {
-    return this.http.post('http://127.0.0.1:5000/api/dayoff', add);
+    return this.http.post(`${this.API_URL}`, add);
   }
 
-  // postPosition(position: PositionInfoModel): Observable<any> {
-  //   return this.http.post('http://127.0.0.1:5000/api/position', {
-  //     name: position.name,
-  //   });
-  // }
-
   deleteDayoff(id: DayoffInfoModel): Observable<any> {
-    return this.http.delete('http://127.0.0.1:5000/api/dayoff/' + id);
+    return this.http.delete(`${this.API_URL}/` + id);
   }
 
   getDayoffByid(id: number): Observable<any> {
-    return this.http.get('http://127.0.0.1:5000/api/dayoff/' + id);
+    return this.http.get(`${this.API_URL}/` + id);
   }
 
   updateDayoff(id: number, dayoff: DayoffInfoModel): Observable<any> {
-    return this.http.put('http://127.0.0.1:5000/api/dayoff/' + id, {
+    return this.http.put(`${this.API_URL}/` + id, {
       name: dayoff.name,
       reason: dayoff.reason,
       date: dayoff.dayoff

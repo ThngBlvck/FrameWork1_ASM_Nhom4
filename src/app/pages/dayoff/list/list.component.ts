@@ -3,6 +3,8 @@ import {DayoffInfoModel} from "../dayoff.component";
 import {DayoffService} from "../../../@core/services/apis/Dayoff.service";
 import { Router} from "@angular/router";
 import {PositionInfoModel} from "../../position/position.component";
+import {DeleteComponent} from "../../position/delete/delete.component";
+import {NbDialogService, NbToastrService} from "@nebular/theme";
 
 @Component({
   selector: 'app-list',
@@ -14,7 +16,9 @@ export class ListComponent implements OnInit{
 
   constructor(
     private dayoff: DayoffService,
-    private router: Router
+    private router: Router,
+    private dialogService: NbDialogService,
+    private toastrService: NbToastrService,
   ) {
   }
   ngOnInit() {
@@ -26,10 +30,20 @@ export class ListComponent implements OnInit{
       console.log(res.data);
     })
   }
-  deleteDayoff(id: DayoffInfoModel){
-    this.dayoff.deleteDayoff(id).subscribe(res => {
-      console.log(res.data);
-      this.router.navigate(['/pages/Dayoff/list']);
-    })
+  deleteDayoff(id: DayoffInfoModel) {
+    this.dialogService.open(DeleteComponent)
+      .onClose.subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.dayoff.deleteDayoff(id).subscribe({
+          next: res => {
+            this.toastrService.show('Xóa chức vụ thành công!', 'Thành công', { status: 'success' });
+            this.getAll();
+          },
+          error: err => {
+            this.toastrService.show('Xóa chức vụ thất bại. Vui lòng thử lại.', 'Lỗi', { status: 'danger' });
+          }
+        });
+      }
+    });
   }
 }

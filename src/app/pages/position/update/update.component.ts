@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PositionInfoModel} from "../position.component";
 import { ActivatedRoute, Router } from '@angular/router';
 import {PositionService} from "../../../@core/services/apis/position.service";
+import {NbToastrService} from "@nebular/theme";
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
@@ -16,7 +17,8 @@ export class UpdateComponent implements OnInit{
   constructor(
     private positionService: PositionService,
     private route: ActivatedRoute,
-    private router: Router ) {
+    private router: Router,
+    private toastrService: NbToastrService) {
 
   }
   ngOnInit(){
@@ -33,10 +35,18 @@ export class UpdateComponent implements OnInit{
       this.updatePosition.patchValue(this.ListById);
     });
   }
+
   saveEditPosition() {
-    this.positionService.updatePosition(this.id, this.updatePosition.value).subscribe(res => {
-      console.log(res);
-      this.router.navigate(['/pages/Position/list']);
-    });
+    if (this.updatePosition.valid) {
+      this.positionService.updatePosition(this.id, this.updatePosition.value).subscribe((res) => {
+          this.handleSaveSuccess(res);
+        },
+      );
+    }
+  }
+  handleSaveSuccess(res: any) {
+    this.toastrService.success('Cập nhật chức vụ thành công!', 'Thành công');
+    this.router.navigate(['/pages/Position/list']).then();
+    console.log(res);
   }
 }

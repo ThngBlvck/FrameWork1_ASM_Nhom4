@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NbToastrModule } from '@nebular/theme';
 // import { Ng2SmartTableModule } from 'ng2-smart-table';
 import {
   NbActionsModule,
@@ -20,6 +21,7 @@ import { AddComponent } from './add/add.component';
 import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms';
 import { UpdateComponent } from './update/update.component';
 import { ListComponent } from './list/list.component';
+import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
   imports: [
@@ -38,7 +40,8 @@ import { ListComponent } from './list/list.component';
     NbIconModule,
     ngFormsModule,
     ReactiveFormsModule,
+    NbToastrModule
   ],
-  declarations: [PositionComponent, AddComponent,  UpdateComponent, ListComponent],
+  declarations: [PositionComponent, AddComponent,  UpdateComponent, ListComponent, DeleteComponent],
 })
 export class PositionModule {}

@@ -10,11 +10,12 @@ export interface PositionInfoModel {
   providedIn: 'root'
 })
 export class PositionService {
+  API_URL = 'http://127.0.0.1:5000/api/position';
   [x: string]: any;
   constructor(private http: HttpClient) {}
 
   getAllPositon(): Observable<any> {
-    return this.http.get('http://127.0.0.1:5000/api/position');
+    return this.http.get(`${this.API_URL}`);
   }
   // getUnit():Observable<any>{
   //   return this.http.get('http://127.0.0.1:3000/api/position',{
@@ -22,25 +23,20 @@ export class PositionService {
   //   })
   // }
   addPosition(add: PositionInfoModel): Observable<any> {
-    return this.http.post('http://127.0.0.1:5000/api/position', add);
+    return this.http.post(`${this.API_URL}`, add);
   }
 
-  // postPosition(position: PositionInfoModel): Observable<any> {
-  //   return this.http.post('http://127.0.0.1:5000/api/position', {
-  //     name: position.name,
-  //   });
-  // }
 
   deletePositions(id: PositionInfoModel): Observable<any> {
-    return this.http.delete('http://127.0.0.1:5000/api/position/' + id);
+    return this.http.delete(`${this.API_URL}/` + id);
   }
 
   getPositionByid(id: number): Observable<any> {
-    return this.http.get('http://127.0.0.1:5000/api/position/' + id);
+    return this.http.get(`${this.API_URL}/` + id);
   }
 
   updatePosition(id: number, position: PositionInfoModel): Observable<any> {
-    return this.http.put('http://127.0.0.1:5000/api/position/' + id, {
+    return this.http.put(`${this.API_URL}/` + id, {
       name: position.name
     });
   }
