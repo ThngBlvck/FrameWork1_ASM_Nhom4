@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Iefficiency} from "../../../@core/interfaces/efficiency.interface";
-import {ActivatedRoute, Router} from "@angular/router";
-import {EfficiencyService} from "../../../@core/services/apis/efficiency.service";
-import {Iemployee} from "../efficiency.component";
+import { Component, OnInit } from '@angular/core';
+import { Iefficiency } from "../../../@core/interfaces/efficiency.interface";
+import { ActivatedRoute, Router } from "@angular/router";
+import { EfficiencyService } from "../../../@core/services/apis/efficiency.service";
+import { Iemployee } from "../efficiency.component";
 
 @Component({
   selector: 'app-update',
@@ -20,8 +20,7 @@ export class UpdateComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void{
-
+  ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.efficiencyService.getAllEfficiency().subscribe(
       res => {
@@ -30,6 +29,7 @@ export class UpdateComponent implements OnInit {
       }
     );
   }
+
   getEmployeeName(employeeId: any): void {
     this.efficiencyService.getAllEmployee().subscribe(
       (res: any) => {
@@ -47,12 +47,14 @@ export class UpdateComponent implements OnInit {
     );
   }
 
-
   updateEfficiency(): void {
     this.efficiencyService.updateEfficiency(this.efficiency.id, this.efficiency).subscribe(
       res => {
         console.log('Updated successfully');
-        this.router.navigate(['/pages/Efficiency']);
+        this.router.navigate(['/pages/Efficiency'], { state: { showUpdateSuccess: true } });
+      },
+      error => {
+        console.error('Lỗi khi cập nhật hiệu suất:', error);
       }
     );
   }

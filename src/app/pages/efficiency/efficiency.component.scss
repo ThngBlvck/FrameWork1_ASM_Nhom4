@@ -1,0 +1,10 @@
+.toast {
+  max-height: 50px; /* Giới hạn chiều rộng tối đa */
+  display: block;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  opacity: 1; /* Thêm thuộc tính này nếu cần */
+}
+

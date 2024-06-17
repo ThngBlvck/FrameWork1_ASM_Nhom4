@@ -7,7 +7,7 @@ const Efficiency = sequelize.define('efficiencys', {
     autoIncrement: true,
     primaryKey: true
   },
-  job: DataTypes.INTEGER,
+  job: DataTypes.STRING,
   progress: DataTypes.INTEGER,
   employee_id: DataTypes.INTEGER,
 },{
