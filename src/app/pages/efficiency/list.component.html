@@ -1,10 +1,13 @@
+<div class="container">
+  <h3>Danh Sách Hiệu Suất</h3>
+
 <table class="table">
   <thead class="thead-dark">
   <tr>
     <th scope="col">#</th>
     <th scope="col">ID Nhân Viên</th>
     <th scope="col">Tên Nhân Viên</th>
-    <th scope="col">Số lượng công việc</th>
+    <th scope="col">Công việc</th>
     <th scope="col">Tiến độ hoàn thành</th>
     <th scope="col">Tác vụ</th>
   </tr>
@@ -15,14 +18,65 @@
     <td>{{ u.employeeId }}</td>
     <td>{{ u.employeeName }}</td>
     <td>{{ u.job }}</td>
-    <td>{{ getProgressText(u.progress)}}</td>
+    <td>{{ getProgressText(u.progress) }}</td>
     <td>
-      <button type="button" class="btn btn-outline-primary" [routerLink]="['edit', u.id]" style="margin-right: 5px;">Sửa</button>
-      <button type="button" class="btn btn-outline-danger" (click)="deleteEfficiency(u.id)">Xoá</button>
+      <button type="button" class="btn btn-outline-primary" [routerLink]="['edit', u.id]" style="margin-right: 5px;">Cập nhật</button>
+      <button type="button" class="btn btn-outline-danger" (click)="openDeleteModal(u)">Xoá</button>
     </td>
   </tr>
   </tbody>
 </table>
+
 <button type="button" class="btn btn-primary" [routerLink]="['add']">Thêm Hiệu Suất</button>
 
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn xóa?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelDelete()">Không</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Thông báo Toast Thành công khi Thêm -->
+<div *ngIf="showAddSuccess" class="toast align-items-center text-white bg-success border-0 position-fixed top-0 end-0 m-3 w-auto" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body fs-6">
+      Thêm thành công
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close" (click)="hideSuccessMessage()"></button>
+  </div>
+</div>
+
+<!-- Thông báo Toast Thành công khi Xóa -->
+<div *ngIf="showSuccess" class="toast align-items-center text-white bg-success border-0 position-fixed top-0 end-0 m-3 w-auto" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body fs-6">
+      Đã xóa thành công
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close" (click)="hideSuccessMessage()"></button>
+  </div>
+</div>
+
+  <!-- Thông báo Toast Thành công khi Cập nhật -->
+  <div *ngIf="showUpdateSuccess" class="toast align-items-center text-white bg-success border-0 position-fixed top-0 end-0 m-3 w-auto" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body fs-6">
+        Cập nhật thành công
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close" (click)="hideSuccessMessage()"></button>
+    </div>
+  </div>
+</div>
 

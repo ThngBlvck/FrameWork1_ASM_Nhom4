@@ -10,7 +10,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss']
 })
-export class AddComponent implements OnInit{
+export class AddComponent implements OnInit {
   newEfficiency: Iefficiency = {
     id: null,
     employee_id: null,
@@ -25,28 +25,29 @@ export class AddComponent implements OnInit{
     private efficiencyService: EfficiencyService,
     private router: Router,
     private fb: FormBuilder,
-) {}
+  ) {}
 
   ngOnInit(): void {
     this.loadEmployees();
   }
 
-
   loadEmployees(): void {
-
     this.efficiencyService.getAllEmployee().subscribe(
       res => {
         this.newEmployees = res.data;
       }
     );
   }
+
   addEfficiency(): void {
     this.efficiencyService.postEfficiency(this.newEfficiency).subscribe(
       res => {
-        console.log('Added successfully');
-        this.router.navigate(['/pages/Efficiency']);
+        console.log('Thêm hiệu suất thành công');
+        this.router.navigate(['/pages/Efficiency'], { state: { showAddSuccess: true } });
+      },
+      error => {
+        console.error('Lỗi khi thêm hiệu suất:', error);
       }
     );
   }
-
 }
