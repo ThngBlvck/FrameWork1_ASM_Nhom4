@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { SalaryService } from '../../../@core/services/apis/salary.service';
 import { Iemployee } from '../../../@core/interfaces/employee';
 import {Router} from "@angular/router";
+import {NbToastrService} from "@nebular/theme";
 
 @Component({
   selector: 'app-add',
@@ -16,7 +17,8 @@ export class AddComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private salaryService: SalaryService,
-  private router: Router
+  private router: Router,
+    private toastrService: NbToastrService
 ) {
     // Khởi tạo form trong constructor
     this.addForm = this.fb.group({
@@ -43,12 +45,31 @@ export class AddComponent implements OnInit {
     });
   }
 
+
   create() {
-    // Gửi dữ liệu form lên server
-    this.salaryService.addSalaryIdx(this.addForm.value).subscribe(res => {
-      console.log(res);
-      // Chuyển hướng sau khi thêm thành công
-      this.router.navigate(['pages/Salary/list']); // Thay thế '/your-success-route' bằng đường dẫn bạn muốn chuyển đến
-    });
+    if (this.addForm.valid) {
+      this.salaryService.addSalaryIdx(this.addForm.value).pipe().subscribe({
+        next: this.handleLoginSuccess.bind(this),
+        error: this.handleError.bind(this),
+      });
+    }
   }
+  protected handleError(error: any) {
+    this.toastrService.show(
+      'Thêm chúc vụ thất bại. Vui lòng thử lại sau.',
+      'Lỗi',
+      { status: 'danger' }
+    );
+    console.error('Error adding positon:', error);
+  }
+  protected handleLoginSuccess(res: any) {
+    this.toastrService.show(
+      'Thêm chức vụ thành công!',
+      'Thành công',
+      { status: 'success' }
+    );
+    this.router.navigate(['/pages/Salary/list']).then();
+    console.log(res);
+  }
+
 }

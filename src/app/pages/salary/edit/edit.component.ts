@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SalaryService } from '../../../@core/services/apis/salary.service';
 import { Iemployee } from '../../../@core/interfaces/employee';
 import { Salary } from '../../../@core/interfaces/salary';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'app-edit',
@@ -15,12 +16,14 @@ export class EditComponent implements OnInit {
   employees: Iemployee[] = [];
   salaryId: number;
   loading = false;
-  salary : Salary;
+  salary: Salary;
+
   constructor(
     private fb: FormBuilder,
     private salaryService: SalaryService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastrService: NbToastrService // inject NbToastrService
   ) {
     this.editForm = this.fb.group({
       employee_id: ['', Validators.required],
@@ -43,9 +46,15 @@ export class EditComponent implements OnInit {
     this.salaryService.updateSalary(this.salary.id, this.salary).subscribe(
       res => {
         console.log('Updated successfully');
+        // Hiển thị thông báo thành công
+        this.toastrService.success('Cập nhật thành công!', 'Thông báo');
+        // Chuyển hướng sau khi cập nhật thành công
         this.router.navigate(['/pages/Salary/list']);
+      },
+      err => {
+        // Hiển thị thông báo lỗi nếu có
+        this.toastrService.danger('Có lỗi xảy ra!', 'Thông báo');
       }
     );
   }
-
 }

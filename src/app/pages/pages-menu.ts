@@ -12,7 +12,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Lương nhân viên',
-    icon: 'person-outline',
+    icon: 'credit-card-outline',
     children: [
       {
         title: 'Danh sách lương nhân viên',
@@ -27,7 +27,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Thông tin nhân viên',
-    icon: 'person-outline',
+    icon: 'people-outline',
     children: [
       {
         title: 'Danh sách thông tin nhân viên',
