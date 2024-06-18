@@ -8,7 +8,7 @@
               <label class="col-sm-3 label" for="department_id">Phòng ban</label>
               <div class="col-sm-9">
                 <nb-select selected="1" name="department_id" id="department_id" formControlName="department_id" fullWidth>
-                  <nb-option *ngFor="let department of departments" value="{{ department.id }}">{{ department.name }}</nb-option>
+                  <nb-option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</nb-option>
                 </nb-select>
                 <small *ngIf="editEmployee.get('department_id').invalid && (editEmployee.get('department_id').dirty || editEmployee.get('department_id').touched)">
                   <i class="text-danger">Vui lòng không bỏ trống !!!</i>
@@ -20,7 +20,7 @@
               <label class="col-sm-3 label" for="position_id">Chức vụ</label>
               <div class="col-sm-9">
                 <nb-select selected="1" name="position_id" id="position_id" formControlName="position_id" fullWidth>
-                  <nb-option *ngFor="let position of positions" value="{{ position.id }}">{{ position.name }}</nb-option>
+                  <nb-option *ngFor="let position of positions" [value]="position.id">{{ position.name }}</nb-option>
                 </nb-select>
                 <small *ngIf="editEmployee.get('position_id').invalid && (editEmployee.get('position_id').dirty || editEmployee.get('position_id').touched)">
                   <i class="text-danger">Vui lòng không bỏ trống !!!</i>
