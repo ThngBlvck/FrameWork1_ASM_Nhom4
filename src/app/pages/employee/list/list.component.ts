@@ -5,6 +5,8 @@ import {EmployeeService} from "../../../@core/services/apis/employee.service";
 import {EmployeeModel} from "../../../@core/interfaces/employee.interface";
 import { DepartmentModel } from 'app/@core/interfaces/department.interface';
 import { PositionService } from 'app/@core/services/apis/position.service';
+import { DeleteComponent } from '../delete/delete.component';
+import { NbDialogService, NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'app-list',
@@ -19,7 +21,9 @@ export class ListComponent implements OnInit{
   constructor(
     private EmployeeService: EmployeeService,
     private DepartmentService: DepartmentService,
-    private PositionService: PositionService) {
+    private PositionService: PositionService,
+    private dialogService: NbDialogService,
+    private toastrService: NbToastrService,) {
 
   }
 
@@ -54,13 +58,30 @@ export class ListComponent implements OnInit{
     })
   }
 
+  // delete(id: EmployeeModel) {
+  //   this.EmployeeService.deleteEmployee(id).subscribe({
+  //     next: () => {
+  //       console.log('xoa thanh cong');
+  //     },
+  //     error: (error) => {
+  //       console.log(error);
+  //     }
+  //   });
+  // }
+
   delete(id: EmployeeModel) {
-    this.EmployeeService.deleteEmployee(id).subscribe({
-      next: () => {
-        console.log('xoa thanh cong');
-      },
-      error: (error) => {
-        console.log(error);
+    this.dialogService.open(DeleteComponent)
+      .onClose.subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.EmployeeService.deleteEmployee(id).subscribe({
+          next: res => {
+            this.toastrService.show('Xóa nhân viên thành công!', 'Thành công', { status: 'success' });
+            this.getAllEmployee();
+          },
+          error: err => {
+            this.toastrService.show('Xóa nhân viên thất bại. Vui lòng thử lại.', 'Lỗi', { status: 'danger' });
+          }
+        });
       }
     });
   }

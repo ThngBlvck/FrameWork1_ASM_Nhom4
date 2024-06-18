@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NbToastrService } from '@nebular/theme';
 import { DepartmentModel } from 'app/@core/interfaces/department.interface';
 import { DepartmentService } from 'app/@core/services/apis/department.service';
 
@@ -17,7 +18,8 @@ export class UpdateComponent implements OnInit{
   constructor(
     private DepartmentService: DepartmentService,
     private route: ActivatedRoute,
-    private router: Router ) {
+    private router: Router,
+    private toastrService: NbToastrService) {
 
   }
 
@@ -36,10 +38,18 @@ export class UpdateComponent implements OnInit{
     });
   }
 
+
   saveUpdateDepartment() {
-    this.DepartmentService.updateDepartment(this.id, this.editDepartment.value).subscribe(res => {
-      console.log(res);
-      this.router.navigate(['/pages/Departments/list']);
-    });
+    if (this.editDepartment.valid) {
+      this.DepartmentService.updateDepartment(this.id, this.editDepartment.value).subscribe((res) => {
+          this.handleSaveSuccess(res);
+        },
+      );
+    }
+  }
+  handleSaveSuccess(res: any) {
+    this.toastrService.success('Cập nhật phòng ban thành công!', 'Thành công');
+    this.router.navigate(['/pages/Departments/list']).then();
+    console.log(res);
   }
 }

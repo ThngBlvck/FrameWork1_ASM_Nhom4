@@ -7,6 +7,7 @@ import { DepartmentService } from 'app/@core/services/apis/department.service';
 import {Router} from "@angular/router";
 import { PositionInfoModel } from 'app/pages/position/position.component';
 import { PositionService } from 'app/@core/services/apis/position.service';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'app-add',
@@ -23,6 +24,7 @@ export class AddComponent implements OnInit{
     private DepartmentService: DepartmentService,
     private PositionService: PositionService,
     private router: Router,
+    private toastrService: NbToastrService,
     // private PositionService: PositionService,
   ) {
 
@@ -55,11 +57,38 @@ export class AddComponent implements OnInit{
 
   }
 
-  create() {
-    this.EmployeeService.postEmployee(this.addForm.value).subscribe(res => {
-      console.log(res);
-      this.router.navigate(['/pages/Employee/list']);
+  // create() {
+  //   this.EmployeeService.postEmployee(this.addForm.value).subscribe(res => {
+  //     console.log(res);
+  //     this.router.navigate(['/pages/Employee/list']);
 
-    })
+  //   })
+  // }
+
+  create() {
+    if (this.addForm.valid) {
+      this.EmployeeService.postEmployee(this.addForm.value).pipe().subscribe({
+        next: this.handleLoginSuccess.bind(this),
+        error: this.handleError.bind(this),
+      });
+    }
+  }
+  protected handleLoginSuccess(res: any) {
+    this.toastrService.show(
+      'Thêm nhân viên thành công!',
+      'Thành công',
+      { status: 'success' }
+    );
+    this.router.navigate(['/pages/Employee/list']).then();
+    console.log(res);
+  }
+
+  protected handleError(error: any) {
+    this.toastrService.show(
+      'Thêm nhân viên thất bại. Vui lòng thử lại sau.',
+      'Lỗi',
+      { status: 'danger' }
+    );
+    console.error('Error adding positon:', error);
   }
 }

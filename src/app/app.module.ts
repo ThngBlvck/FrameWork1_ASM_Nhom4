@@ -14,7 +14,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {CoreModule} from "./@core/core.module";
 import {ThemeModule} from "./@theme/theme.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {EfficiencyService} from "./@core/services/apis/efficiency.service";
+
 
 
 
@@ -43,7 +43,7 @@ import {EfficiencyService} from "./@core/services/apis/efficiency.service";
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
   ],
-  providers: [EfficiencyService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
