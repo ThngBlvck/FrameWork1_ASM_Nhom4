@@ -50,6 +50,7 @@ export class AddComponent implements OnInit {
       this.communicationsService.addCommunicationsIdx(formData).subscribe(
         (res) => {
           console.log('Thêm thành công:', res);
+          this.toastrService.success('Thêm nhân viên thành công', 'Success');
           // Chuyển hướng sau khi thêm thành công
           this.router.navigate(['pages/Communications/list']); // Thay thế '/your-success-route' bằng đường dẫn bạn muốn chuyển đến
         },
