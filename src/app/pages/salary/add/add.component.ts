@@ -56,7 +56,7 @@ export class AddComponent implements OnInit {
   }
   protected handleError(error: any) {
     this.toastrService.show(
-      'Thêm chúc vụ thất bại. Vui lòng thử lại sau.',
+      'Thêm thất bại. Vui lòng thử lại sau.',
       'Lỗi',
       { status: 'danger' }
     );
@@ -64,7 +64,7 @@ export class AddComponent implements OnInit {
   }
   protected handleLoginSuccess(res: any) {
     this.toastrService.show(
-      'Thêm chức vụ thành công!',
+      'Thêm thành công!',
       'Thành công',
       { status: 'success' }
     );
