@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Iemployee } from "../../../@core/interfaces/employee";
-import { CTions } from "../../../@core/interfaces/communications";
-import { CommunicationsService } from "../../../@core/services/apis/communications.service";
-import { NbToastrService } from '@nebular/theme';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Iemployee} from "../../../@core/interfaces/employee";
+import {CTions} from "../../../@core/interfaces/communications";
+import {SalaryService} from "../../../@core/services/apis/salary.service";
+import {CommunicationsService} from "../../../@core/services/apis/communications.service";
 
 @Component({
   selector: 'app-edit',
@@ -14,8 +14,7 @@ import { NbToastrService } from '@nebular/theme';
 export class EditComponent implements OnInit {
   editForm: FormGroup;
   employees: Iemployee[] = [];
-  ction: CTions;
-
+  ction : CTions
   constructor(
     private fb: FormBuilder,
     private communicationsService: CommunicationsService,
@@ -26,7 +25,7 @@ export class EditComponent implements OnInit {
     this.editForm = this.fb.group({
       employee_id: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
       address: ['', Validators.required],
     });
   }
@@ -60,3 +59,4 @@ export class EditComponent implements OnInit {
     }
   }
 }
+

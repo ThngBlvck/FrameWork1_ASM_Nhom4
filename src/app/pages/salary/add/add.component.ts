@@ -45,7 +45,6 @@ export class AddComponent implements OnInit {
     });
   }
 
-
   create() {
     if (this.addForm.valid) {
       this.salaryService.addSalaryIdx(this.addForm.value).pipe().subscribe({
@@ -56,7 +55,7 @@ export class AddComponent implements OnInit {
   }
   protected handleError(error: any) {
     this.toastrService.show(
-      'Thêm thất bại. Vui lòng thử lại sau.',
+      'Thêm chúc vụ thất bại. Vui lòng thử lại sau.',
       'Lỗi',
       { status: 'danger' }
     );
@@ -64,12 +63,11 @@ export class AddComponent implements OnInit {
   }
   protected handleLoginSuccess(res: any) {
     this.toastrService.show(
-      'Thêm thành công!',
+      'Thêm chức vụ thành công!',
       'Thành công',
       { status: 'success' }
     );
     this.router.navigate(['/pages/Salary/list']).then();
     console.log(res);
   }
-
 }

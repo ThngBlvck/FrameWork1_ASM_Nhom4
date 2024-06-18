@@ -24,7 +24,7 @@ export class AddComponent implements OnInit {
   ngOnInit(): void {
     this.addForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
       address: ['', Validators.required],
       employee_id: ['', Validators.required]
     });
@@ -50,19 +50,15 @@ export class AddComponent implements OnInit {
       this.communicationsService.addCommunicationsIdx(formData).subscribe(
         (res) => {
           console.log('Thêm thành công:', res);
-          // Hiển thị thông báo thành công
-          this.toastrService.success('Thêm thành công!', 'Thông báo');
           // Chuyển hướng sau khi thêm thành công
-          this.router.navigate(['pages/Communications/list']);
+          this.router.navigate(['pages/Communications/list']); // Thay thế '/your-success-route' bằng đường dẫn bạn muốn chuyển đến
         },
         (error) => {
           console.error('Lỗi khi thêm:', error);
-          this.toastrService.danger('Lỗi khi thêm!', 'Thông báo');
         }
       );
     } else {
       console.log('Form không hợp lệ. Vui lòng kiểm tra lại.');
-      this.toastrService.warning('Form không hợp lệ!', 'Thông báo');
     }
   }
 }
