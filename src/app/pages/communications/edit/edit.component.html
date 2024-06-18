@@ -1,4 +1,3 @@
-
 <div class="container mt-4">
   <nb-card>
     <nb-card-header>
@@ -25,7 +24,7 @@
         <div class="form-group">
           <label for="phone">Số điện thoại</label>
           <input type="number" class="form-control" formControlName="phone" [(ngModel)]="ction.phone" id="phone" placeholder="Nhập số điện thoại">
-          <span class="text-danger" *ngIf="editForm.get('phone')?.invalid && editForm.get('phone')?.touched">không được bỏ trống, phải có 10 số</span>
+          <span class="text-danger" *ngIf="editForm.get('phone')?.invalid && editForm.get('phone')?.touched">Số điện thoại phải có đúng 10 số</span>
         </div>
 
         <div class="form-group">
@@ -33,7 +32,6 @@
           <input type="text" class="form-control" formControlName="address" [(ngModel)]="ction.address" id="address" placeholder="Nhập địa chỉ">
           <span class="text-danger" *ngIf="editForm.get('address')?.invalid && editForm.get('address')?.touched">Địa chỉ không được bỏ trống</span>
         </div>
-
 
         <button type="submit" class="btn btn-primary px-4" [disabled]="editForm.invalid">Cập Nhật</button>
       </form>

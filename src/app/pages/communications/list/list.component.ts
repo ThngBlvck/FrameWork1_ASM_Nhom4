@@ -1,42 +1,47 @@
-import { Component } from '@angular/core';
-import {FormGroup} from "@angular/forms";
-import {CTions} from "../../../@core/interfaces/communications";
+import { Component, OnInit } from '@angular/core';
 import { CommunicationsService } from 'app/@core/services/apis/communications.service';
-import {Iemployee} from "../../../@core/interfaces/employee";
-import {Router} from "@angular/router";
+import { Iemployee } from 'app/@core/interfaces/employee';
+import { Router } from "@angular/router";
+import { NbToastrService } from '@nebular/theme';
+import {CTions} from "../../../@core/interfaces/communications";
+
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
   listCTions: CTions[] = [];
   listEmployees: Iemployee[] = [];
-  combineData : any[];
+  combineData: any[];
+
   constructor(
-    private CommunicationsService: CommunicationsService,
-    private router: Router){
-  }
+    private communicationsService: CommunicationsService,
+    private router: Router,
+    private toastrService: NbToastrService // Inject NbToastrService
+  ) { }
+
   ngOnInit(): void {
     this.getCTions();
     this.getEmployee();
   }
 
-
   getCTions(): void {
-    this.CommunicationsService.getAllCommunications().subscribe(res => {
+    this.communicationsService.getAllCommunications().subscribe(res => {
       console.log(res.data);
       this.listCTions = res.data;
-
     });
   }
+
   getEmployee(): void {
-    this.CommunicationsService.getAllEmployee().subscribe(res => {
+    this.communicationsService.getAllEmployee().subscribe(res => {
       console.log(res.data);
       this.listEmployees = res.data;
       this.combineDatas();
     });
   }
+
   combineDatas(): void {
     if (this.listCTions.length > 0 && this.listEmployees.length > 0) {
       this.combineData = this.listCTions.map(communication => {
@@ -49,16 +54,17 @@ export class ListComponent {
     }
   }
 
-
   delete(id: number): void {
-    this.CommunicationsService.deleteCommunications(id).subscribe(
+    this.communicationsService.deleteCommunications(id).subscribe(
       (res) => {
         console.log('Xóa thành công:', res);
-        // Thực hiện các hành động sau khi xóa thành công
+        // Hiển thị thông báo thành công
+        this.toastrService.success('Xóa thành công!', 'Thông báo');
+        this.combineData = this.combineData.filter(communication => communication.id !== id);
       },
       (error) => {
         console.error('Lỗi khi xóa:', error);
-        // Xử lý lỗi nếu có
+        this.toastrService.danger('Lỗi khi xóa!', 'Thông báo');
       }
     );
   }
@@ -66,13 +72,12 @@ export class ListComponent {
   editCtion(CtionId: number): void {
     this.router.navigate(['pages/Communications/edit', CtionId]);
   }
+
   confirmDelete(id: number): void {
     const confirmDelete = confirm('Bạn có chắc chắn muốn xoá?');
     if (confirmDelete) {
       // Gọi hàm xử lý xoá
       this.delete(id);
-    } else {
-      // Không làm gì cả
     }
   }
 }

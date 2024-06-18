@@ -1,35 +1,42 @@
-<div class="container mt-4">
-  <h2>Thêm thông tin</h2>
-  <form [formGroup]="addForm" (ngSubmit)="create()">
-    <div class="mb-3">
-      <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" id="email" formControlName="email" required>
-      <span class="text-danger" *ngIf="addForm.get('email')?.invalid && addForm.get('email')?.touched">Email không hợp lệ</span>
-
-    </div>
-    <div class="mb-3">
-      <label for="phone" class="form-label">Số điện thoại</label>
-      <input type="tel" class="form-control" id="phone" formControlName="phone" required>
-      <span class="text-danger" *ngIf="addForm.get('phone')?.invalid && addForm.get('phone')?.touched">Số điện thoại không hợp lệ</span>
 
 
-    </div>
-    <div class="mb-3">
-      <label for="address" class="form-label">Địa chỉ</label>
-      <input type="text" class="form-control" id="address" formControlName="address" required>
-      <span class="text-danger" *ngIf="addForm.get('address')?.invalid && addForm.get('address')?.touched">Địa chỉ không được bỏ trống</span>
+<nb-card>
+  <nb-card-header class="text-center text-white">
+    <h2>Thêm thông tin</h2>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="addForm" (ngSubmit)="create()">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email" required>
+        <span class="text-danger" *ngIf="addForm.get('email')?.invalid && addForm.get('email')?.touched">Email không hợp lệ</span>
+
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">Số điện thoại</label>
+        <input type="tel" class="form-control" id="phone" formControlName="phone" required>
+        <span class="text-danger" *ngIf="addForm.get('phone')?.invalid && addForm.get('phone')?.touched">Số điện thoại không hợp lệ</span>
 
 
-    </div>
-    <div class="form-group">
-      <label for="employee_id">Chọn Nhân Viên</label>
-      <select class="form-control" formControlName="employee_id" id="employee_id">
-        <option *ngFor="let employee of employees" [value]="employee.id">
-          {{ employee.name }}
-        </option>
-      </select>
+      </div>
+      <div class=" form-group">
+        <label for="address" class="form-label">Địa chỉ</label>
+        <input type="text" class="form-control" id="address" formControlName="address" required>
+        <span class="text-danger" *ngIf="addForm.get('address')?.invalid && addForm.get('address')?.touched">Địa chỉ không được bỏ trống</span>
 
-    </div>
-    <button type="submit" class="btn btn-primary" [disabled]="addForm.invalid">Thêm</button>
-  </form>
-</div>
+
+      </div>
+      <div class="form-group py-2">
+        <label for="employee_id">Chọn Nhân Viên</label>
+        <select class="form-control" formControlName="employee_id" id="employee_id">
+          <option *ngFor="let employee of employees" [value]="employee.id">
+            {{ employee.name }}
+          </option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary px-4" [disabled]="addForm.invalid">Thêm</button>
+
+    </form>
+    </nb-card-body>
+    </nb-card>
