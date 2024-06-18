@@ -8,9 +8,21 @@
   </thead>
   <tbody>
   <tr>
-    <td class="">{{ totalEmployees }}</td>
-    <td class="">{{ employeesAchieved }}</td>
-    <td class="">{{ employeesNotAchieved }}</td>
+    <td>{{ totalEmployees }}</td>
+    <td>{{ employeesAchieved }}</td>
+    <td>{{ employeesNotAchieved }}</td>
   </tr>
   </tbody>
 </table>
+
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+  <ngx-charts-pie-chart
+    [view]="[700, 400]"
+    [scheme]="colorScheme"
+    [results]="chartData"
+    [gradient]="true"
+    [legend]="true"
+    [labels]="true"
+    [doughnut]="false">
+  </ngx-charts-pie-chart>
+</div>

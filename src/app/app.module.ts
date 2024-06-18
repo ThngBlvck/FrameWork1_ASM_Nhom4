@@ -14,6 +14,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {CoreModule} from "./@core/core.module";
 import {ThemeModule} from "./@theme/theme.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 
 
@@ -30,6 +31,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    NgxChartsModule,
     ReactiveFormsModule,
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),

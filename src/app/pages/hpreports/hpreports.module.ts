@@ -17,6 +17,7 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { HPreportsRoutingModule } from './hpreports-routing.module';
 import { HPreportsComponent } from './hpreports.component';
 import { FormsModule as ngFormsModule } from '@angular/forms';
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { FormsModule as ngFormsModule } from '@angular/forms';
     NbSelectModule,
     NbIconModule,
     ngFormsModule,
+    NgxChartsModule,
   ],
   declarations: [HPreportsComponent],
 })
