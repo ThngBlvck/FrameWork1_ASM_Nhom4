@@ -1,7 +1,7 @@
 export interface CTions {
     id: null | number;
     email: string;
-    phone: number;
+    phone: string;
     address: string;
     employee_id: number;
   }

@@ -21,6 +21,7 @@ import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms'
 
 import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
+import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
   imports: [
@@ -39,6 +40,6 @@ import { ListComponent } from './list/list.component';
     ngFormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [CommunicationsComponent, AddComponent, EditComponent, ListComponent],
+  declarations: [CommunicationsComponent, AddComponent, EditComponent, ListComponent, DeleteComponent],
 })
 export class CommunicationsModule {}
