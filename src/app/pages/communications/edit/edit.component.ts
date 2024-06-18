@@ -5,6 +5,7 @@ import {Iemployee} from "../../../@core/interfaces/employee";
 import {CTions} from "../../../@core/interfaces/communications";
 import {SalaryService} from "../../../@core/services/apis/salary.service";
 import {CommunicationsService} from "../../../@core/services/apis/communications.service";
+import {NbToastrService} from "@nebular/theme";
 
 @Component({
   selector: 'app-edit',
