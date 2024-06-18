@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommunicationsService } from 'app/@core/services/apis/communications.service';
 import { Iemployee } from 'app/@core/interfaces/employee';
 import { Router } from "@angular/router";
-import { NbToastrService } from '@nebular/theme';
-import {CTions} from "../../../@core/interfaces/communications";
+import { NbDialogService, NbToastrService } from '@nebular/theme';
+import { CTions } from "../../../@core/interfaces/communications";
 
+import { DeleteComponent } from "../../communications/delete/delete.component";
 
 @Component({
   selector: 'app-list',
@@ -14,12 +15,13 @@ import {CTions} from "../../../@core/interfaces/communications";
 export class ListComponent implements OnInit {
   listCTions: CTions[] = [];
   listEmployees: Iemployee[] = [];
-  combineData: any[];
+  combineData: any[] = [];
 
   constructor(
     private communicationsService: CommunicationsService,
     private router: Router,
-    private toastrService: NbToastrService // Inject NbToastrService
+    private dialogService: NbDialogService,
+    private toastrService: NbToastrService,
   ) { }
 
   ngOnInit(): void {
@@ -31,6 +33,7 @@ export class ListComponent implements OnInit {
     this.communicationsService.getAllCommunications().subscribe(res => {
       console.log(res.data);
       this.listCTions = res.data;
+      this.combineDatas();
     });
   }
 
@@ -55,29 +58,24 @@ export class ListComponent implements OnInit {
   }
 
   delete(id: number): void {
-    this.communicationsService.deleteCommunications(id).subscribe(
-      (res) => {
-        console.log('Xóa thành công:', res);
-        // Hiển thị thông báo thành công
-        this.toastrService.success('Xóa thành công!', 'Thông báo');
-        this.combineData = this.combineData.filter(communication => communication.id !== id);
-      },
-      (error) => {
-        console.error('Lỗi khi xóa:', error);
-        this.toastrService.danger('Lỗi khi xóa!', 'Thông báo');
+    this.dialogService.open(DeleteComponent)
+      .onClose.subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.communicationsService.deleteCommunications(id).subscribe({
+          next: res => {
+            this.toastrService.show('Xóa thông tin nhân viên thành công!', 'Thành công', { status: 'success' });
+            this.getCTions();  // Re-fetch the communications data
+            this.getEmployee();  // Re-fetch the employee data
+          },
+          error: err => {
+            this.toastrService.show('Xóa thông tin nhân viên thất bại. Vui lòng thử lại.', 'Lỗi', { status: 'danger' });
+          }
+        });
       }
-    );
+    });
   }
 
   editCtion(CtionId: number): void {
     this.router.navigate(['pages/Communications/edit', CtionId]);
-  }
-
-  confirmDelete(id: number): void {
-    const confirmDelete = confirm('Bạn có chắc chắn muốn xoá?');
-    if (confirmDelete) {
-      // Gọi hàm xử lý xoá
-      this.delete(id);
-    }
   }
 }

@@ -21,6 +21,7 @@ import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms'
 import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 import {SalaryService} from "../../@core/services/apis/salary.service";
+import { DeleteComponent } from './delete/delete.component';
 
 
 @NgModule({
@@ -44,6 +45,6 @@ import {SalaryService} from "../../@core/services/apis/salary.service";
   providers: [
     SalaryService
   ],
-  declarations: [SalaryComponent, AddComponent, EditComponent, ListComponent],
+  declarations: [SalaryComponent, AddComponent, EditComponent, ListComponent, DeleteComponent],
 })
 export class SalaryModule {}

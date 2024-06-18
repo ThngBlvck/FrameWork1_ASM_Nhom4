@@ -3,7 +3,8 @@ import { Salary } from 'app/@core/interfaces/salary';
 import { SalaryService } from 'app/@core/services/apis/salary.service';
 import { Iemployee } from 'app/@core/interfaces/employee';
 import { Router } from "@angular/router";
-import { NbToastrService } from '@nebular/theme';
+import {NbDialogService, NbToastrService} from '@nebular/theme';
+import {DeleteComponent} from "../../salary/delete/delete.component";
 
 @Component({
   selector: 'app-list',
@@ -18,7 +19,8 @@ export class ListComponent implements OnInit {
   constructor(
     private salaryService: SalaryService,
     private router: Router,
-    private toastrService: NbToastrService // Inject NbToastrService
+    private dialogService: NbDialogService,
+    private toastrService: NbToastrService,
   ) { }
 
   ngOnInit(): void {
@@ -54,30 +56,47 @@ export class ListComponent implements OnInit {
     }
   }
 
-  deleteSalary(id: number): void {
-    this.salaryService.deleteSalary(id).subscribe(
-      res => {
-        console.log('Deleted successfully');
-        // Hiển thị thông báo thành công
-        this.toastrService.success('Xóa thành công!', 'Thông báo');
-        this.combineData = this.combineData.filter(salary => salary.id !== id);
-      },
-      err => {
-        console.error('Error deleting salary:', err);
-        this.toastrService.danger('Có lỗi xảy ra khi xóa!', 'Thông báo');
-      }
-    );
-  }
+  // deleteSalary(id: number): void {
+  //   this.salaryService.deleteSalary(id).subscribe(
+  //     res => {
+  //       console.log('Deleted successfully');
+  //       // Hiển thị thông báo thành công
+  //       this.toastrService.success('Xóa thành công!', 'Thông báo');
+  //       this.combineData = this.combineData.filter(salary => salary.id !== id);
+  //     },
+  //     err => {
+  //       console.error('Error deleting salary:', err);
+  //       this.toastrService.danger('Có lỗi xảy ra khi xóa!', 'Thông báo');
+  //     }
+  //   );
+  // }
 
   editSalary(salaryId: number): void {
     this.router.navigate(['pages/Salary/edit', salaryId]);
   }
 
-  confirmDelete(id: number): void {
-    const confirmDelete = confirm('Bạn có chắc chắn muốn xoá?');
-    if (confirmDelete) {
-      // Gọi hàm xử lý xoá
-      this.deleteSalary(id);
-    }
+  // confirmDelete(id: number): void {
+  //   const confirmDelete = confirm('Bạn có chắc chắn muốn xoá?');
+  //   if (confirmDelete) {
+  //     // Gọi hàm xử lý xoá
+  //     this.deleteSalary(id);
+  //   }
+  // }
+
+  delete(id: number): void {
+    this.dialogService.open(DeleteComponent)
+      .onClose.subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.salaryService.deleteSalary(id).subscribe({
+          next: res => {
+            this.toastrService.show('Xóa lương thành công!', 'Thành công', { status: 'success' });
+            this.combineDatas();
+          },
+          error: err => {
+            this.toastrService.show('Xóa lương thất bại. Vui lòng thử lại.', 'Lỗi', { status: 'danger' });
+          }
+        });
+      }
+    });
   }
 }

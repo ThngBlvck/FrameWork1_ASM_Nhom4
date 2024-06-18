@@ -23,7 +23,7 @@
 
         <div class="form-group">
           <label for="phone">Số điện thoại</label>
-          <input type="number" class="form-control" formControlName="phone" [(ngModel)]="ction.phone" id="phone" placeholder="Nhập số điện thoại">
+          <input type="tel" class="form-control" formControlName="phone" [(ngModel)]="ction.phone" id="phone" placeholder="Nhập số điện thoại">
           <span class="text-danger" *ngIf="editForm.get('phone')?.invalid && editForm.get('phone')?.touched">Số điện thoại phải có đúng 10 số</span>
         </div>
 

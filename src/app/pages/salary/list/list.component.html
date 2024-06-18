@@ -25,7 +25,7 @@
             <td>{{ s.salarytru | number:'1.2-2' }} VNĐ</td>
             <td>
               <button type="button" class="btn btn-outline-primary btn-sm py-1" style="margin-right: 5px;" (click)="editSalary(s.id)">Sửa</button>
-              <button type="button" class="btn btn-outline-danger btn-sm" (click)="confirmDelete(s.id)">Xoá</button>
+              <button type="button" class="btn btn-outline-danger btn-sm" (click)="delete(s.id)">Xoá</button>
 
             </td>
           </tr>
