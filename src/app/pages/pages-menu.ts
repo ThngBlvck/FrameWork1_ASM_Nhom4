@@ -85,7 +85,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Phòng ban',
-    icon: 'person-outline',
+    icon: 'book-open-outline',
     children: [
       {
         title: 'Thêm',
