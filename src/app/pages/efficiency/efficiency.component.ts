@@ -3,6 +3,7 @@ import { Iefficiency } from "../../@core/interfaces/efficiency.interface";
 import { EfficiencyService } from "../../@core/services/apis/efficiency.service";
 import { NgForOf, NgIf } from "@angular/common";
 import { RouterLink, Router } from "@angular/router";
+import { NbToastrService } from '@nebular/theme'; // Import NbToastrService
 
 export interface Iemployee {
   id: number;
@@ -33,23 +34,13 @@ export class EfficiencyComponent implements OnInit {
 
   deleteId: number | null = null;
   showSuccess: boolean = false;
-  showAddSuccess: boolean = false;
-  showUpdateSuccess: boolean = false;
 
-  constructor(private efficiencyService: EfficiencyService, private router: Router) {
-    const navigation = this.router.getCurrentNavigation();
-    if (navigation?.extras?.state?.showAddSuccess) {
-      this.showAddSuccess = true;
-      setTimeout(() => {
-        this.showAddSuccess = false;
-      }, 3000);
-    }
-    if (navigation?.extras?.state?.showUpdateSuccess) {
-      this.showUpdateSuccess = true;
-      setTimeout(() => {
-        this.showUpdateSuccess = false;
-      }, 3000);
-    }
+  constructor(
+    private efficiencyService: EfficiencyService,
+    private router: Router,
+    private toastrService: NbToastrService // Tiêm NbToastrService
+  ) {
+
   }
 
   ngOnInit(): void {
@@ -65,7 +56,7 @@ export class EfficiencyComponent implements OnInit {
         this.combineData();
       },
       (error) => {
-        console.error('Error fetching efficiency data:', error);
+        console.error('Lỗi khi lấy dữ liệu hiệu suất:', error);
       }
     );
   }
@@ -78,7 +69,7 @@ export class EfficiencyComponent implements OnInit {
         this.combineData();
       },
       (error) => {
-        console.error('Error fetching employee data:', error);
+        console.error('Lỗi khi lấy dữ liệu nhân viên:', error);
       }
     );
   }
@@ -106,7 +97,7 @@ export class EfficiencyComponent implements OnInit {
 
   cancelDelete(): void {
     $('#deleteModal').modal('hide');
-    this.deleteId = null; // Reset deleteId when cancelling
+    this.deleteId = null; // Đặt lại deleteId khi hủy
   }
 
   confirmDelete(): void {
@@ -115,17 +106,13 @@ export class EfficiencyComponent implements OnInit {
         (res) => {
           console.log('Đã xóa thành công');
           this.combinedData = this.combinedData.filter((item) => item.id !== this.deleteId);
-          this.showSuccess = true; // Thiết lập showSuccess thành true khi xóa thành công
-          console.log('showSuccess:', this.showSuccess); // Log trạng thái của showSuccess
-          setTimeout(() => {
-            this.showSuccess = false; // Ẩn thông báo thành công sau 3 giây
-            console.log('showSuccess hidden:', this.showSuccess); // Log khi showSuccess được ẩn
-          }, 3000);
+          this.toastrService.success('Đã xóa thành công', 'Success'); // Hiển thị thông báo thành công
           $('#deleteModal').modal('hide'); // Ẩn modal sau khi xóa thành công
           this.deleteId = null; // Đặt lại deleteId
         },
         (error) => {
           console.error('Lỗi khi xóa hiệu suất:', error);
+          this.toastrService.danger('Lỗi khi xóa hiệu suất', 'Error'); // Hiển thị thông báo lỗi
         }
       );
     }
@@ -133,7 +120,5 @@ export class EfficiencyComponent implements OnInit {
 
   hideSuccessMessage(): void {
     this.showSuccess = false;
-    this.showAddSuccess = false;
-    this.showUpdateSuccess = false;
   }
 }
