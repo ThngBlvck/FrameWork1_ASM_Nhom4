@@ -40,9 +40,9 @@ export class UpdateComponent implements OnInit{
       department_id: new FormControl('',Validators.required),
       position_id: new FormControl('',Validators.required),
     });
-    this.updateEmployee(this.id);
     this.getAllPosition();
     this.getAllDepartment();
+    this.updateEmployee(this.id);
   }
   getAllPosition(){
     this.PositionService.getAllPositon().subscribe(res =>{
