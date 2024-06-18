@@ -7,7 +7,7 @@
         <div class="form-group row py-1">
           <label for="name" class="label col-sm-3 col-form-label">Tên nhân viên</label>
           <div class="col-sm-9">
-            <input type="text" nbInput formControlName="name" id="name" placeholder="Nhập tên nhân viên vào đây">
+            <input type="text" nbInput fullWidth formControlName="name" id="name" placeholder="Nhập tên nhân viên vào đây">
             <small *ngIf="addForm.get('name').invalid && (addForm.get('name').dirty || addForm.get('name').touched)">
               <i class="text-danger">Vui lòng không bỏ trống tên nhân viên</i>
             </small>
@@ -16,7 +16,7 @@
         <div class="form-group row py-1">
           <label for="reason" class="label col-sm-3 col-form-label">Lí do nghĩ</label>
           <div class="col-sm-9">
-            <input type="text" nbInput   formControlName="reason" id="reason" placeholder="Nhập lí do nghĩ vào đây">
+            <input type="text" nbInput fullWidth  formControlName="reason" id="reason" placeholder="Nhập lí do nghĩ vào đây">
             <small *ngIf="addForm.get('reason').invalid && (addForm.get('reason').dirty || addForm.get('reason').touched)">
               <i class="text-danger">Vui lòng không bỏ trống lí do</i>
             </small>
@@ -25,7 +25,7 @@
         <div class="form-group row py-1">
           <label class="col-sm-3 label"  for="dayoff">Ngày nghĩ</label>
           <div class="col-sm-9">
-            <input nbInput placeholder="Nhập ngày nghĩ " id="dayoff" formControlName="dayoff" [nbDatepicker]="formpicker">
+            <input nbInput fullWidth placeholder="Nhập ngày nghĩ " id="dayoff" formControlName="dayoff" [nbDatepicker]="formpicker">
             <small *ngIf="addForm.get('dayoff').invalid && (addForm.get('dayoff').dirty || addForm.get('dayoff').touched)">
               <i class="text-danger">Vui lòng không bỏ trống ngày nghĩ</i>
             </small>
