@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NbToastrService } from '@nebular/theme';
 import { DepartmentModel } from 'app/@core/interfaces/department.interface';
 import { EmployeeModel } from 'app/@core/interfaces/employee.interface';
 import { DepartmentService } from 'app/@core/services/apis/department.service';
@@ -24,7 +25,8 @@ export class UpdateComponent implements OnInit{
     private DepartmentService: DepartmentService,
     private PositionService: PositionService,
     private route: ActivatedRoute,
-    private router: Router ) {
+    private router: Router,
+    private toastrService: NbToastrService ) {
 
   }
 
@@ -64,11 +66,19 @@ export class UpdateComponent implements OnInit{
     });
   }
 
+
   saveUpdateEmployee() {
-    this.EmployeeService.updateEmployee(this.id, this.editEmployee.value).subscribe(res => {
-      console.log(res);
-      this.router.navigate(['/pages/Employee/list']);
-    });
+    if (this.editEmployee.valid) {
+      this.EmployeeService.updateEmployee(this.id, this.editEmployee.value).subscribe((res) => {
+          this.handleSaveSuccess(res);
+        },
+      );
+    }
+  }
+  handleSaveSuccess(res: any) {
+    this.toastrService.success('Cập nhật nhân viên thành công!', 'Thành công');
+    this.router.navigate(['/pages/Employee/list']).then();
+    console.log(res);
   }
 
 

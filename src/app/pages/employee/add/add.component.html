@@ -1,4 +1,5 @@
-
+<div class="container">
+  <div class="row">
     <div class="col-md-12">
       <nb-card>
         <nb-card-header>Nhân viên | Thêm</nb-card-header>
@@ -7,7 +8,7 @@
             <div class="form-group row py-1">
               <label class="col-sm-3 label" for="department_id">Phòng ban</label>
               <div class="col-sm-9">
-                <nb-select selected="1" name="department_id" formControlName="department_id">
+                <nb-select selected="1" name="department_id" formControlName="department_id" fullWidth>
                   <nb-option value="{{ department.id }}"  *ngFor="let department of departments">{{ department.name }}</nb-option>
                 </nb-select>
               </div>
@@ -16,7 +17,7 @@
             <div class="form-group row py-1">
               <label class="col-sm-3 label" for="position_id">Chức vụ</label>
               <div class="col-sm-9">
-                <nb-select selected="1" name="position_id" formControlName="position_id">
+                <nb-select selected="1" name="position_id" formControlName="position_id" fullWidth>
                   <nb-option value="{{ position.id }}" *ngFor="let position of positions">{{ position.name }}</nb-option>
                 </nb-select>
               </div>
@@ -47,5 +48,4 @@
         </nb-card-body>
       </nb-card>
     </div>
-  
 

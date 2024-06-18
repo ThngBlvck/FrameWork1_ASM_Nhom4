@@ -20,6 +20,7 @@ import { AddComponent } from './add/add.component';
 import { ReactiveFormsModule, FormsModule as ngFormsModule } from '@angular/forms';
 import { UpdateComponent } from './update/update.component';
 import { ListComponent } from './list/list.component';
+import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
   imports: [
@@ -39,6 +40,6 @@ import { ListComponent } from './list/list.component';
     ngFormsModule,
     ReactiveFormsModule
   ],
-  declarations: [EmployeeComponent, AddComponent, UpdateComponent, ListComponent],
+  declarations: [EmployeeComponent, AddComponent, UpdateComponent, ListComponent, DeleteComponent],
 })
 export class EmployeeModule {}
