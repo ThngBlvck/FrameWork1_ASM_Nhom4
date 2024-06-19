@@ -21,6 +21,7 @@ import { ReactiveFormsModule, FormsModule as ngFormsModule } from '@angular/form
 import { UpdateComponent } from './update/update.component';
 import { ListComponent } from './list/list.component';
 import { DeleteComponent } from './delete/delete.component';
+import { PaginatorModule } from 'app/@theme/components/paginator/paginator.module';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { DeleteComponent } from './delete/delete.component';
     NbSelectModule,
     NbIconModule,
     ngFormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PaginatorModule
   ],
   declarations: [EmployeeComponent, AddComponent, UpdateComponent, ListComponent, DeleteComponent],
 })

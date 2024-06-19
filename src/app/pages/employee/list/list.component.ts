@@ -17,7 +17,10 @@ export class ListComponent implements OnInit{
   employees: EmployeeModel[];
   departments: DepartmentModel[];
   positions: PositionInfoModel[];
-  combinedData: any[];
+  combinedData: any[] = [];
+  paginatedData: any[] = [];
+  currentPage: number = 1;
+  pageSize: number = 5;
   constructor(
     private EmployeeService: EmployeeService,
     private DepartmentService: DepartmentService,
@@ -58,16 +61,16 @@ export class ListComponent implements OnInit{
     })
   }
 
-  // delete(id: EmployeeModel) {
-  //   this.EmployeeService.deleteEmployee(id).subscribe({
-  //     next: () => {
-  //       console.log('xoa thanh cong');
-  //     },
-  //     error: (error) => {
-  //       console.log(error);
-  //     }
-  //   });
-  // }
+  setPaginatedData(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedData = this.combinedData.slice(startIndex, endIndex);
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.setPaginatedData();
+  }
 
   delete(id: EmployeeModel) {
     this.dialogService.open(DeleteComponent)
@@ -97,6 +100,8 @@ export class ListComponent implements OnInit{
       });
     }
   }
+
+  
 }
 
 

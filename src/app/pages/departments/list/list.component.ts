@@ -11,19 +11,15 @@ import { NbDialogService, NbToastrService } from '@nebular/theme';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit{
-  departments!: DepartmentModel[]
+  departments: DepartmentModel[] = [];
+  paginatedData: any[] = [];
+  currentPage: number = 1;
+  pageSize: number = 5;
   constructor(
     private DepartmentService: DepartmentService,
     private dialogService: NbDialogService,
     private toastrService: NbToastrService,) {
-    this.DepartmentService.getAllDepartment().subscribe({
-      next: (data) => {
-        this.departments = data;
-      },
-      error: () => {
 
-      }
-    });
   }
   ngOnInit(): void {
     this.getAllDepartment();
@@ -36,16 +32,16 @@ export class ListComponent implements OnInit{
     })
   }
 
-  // delete(id: DepartmentModel) {
-  //   this.DepartmentService.deleteDepartment(id).subscribe({
-  //     next: () => {
-  //       console.log('xoa thanh cong');
-  //     },
-  //     error: (error) => {
-  //       console.log(error);
-  //     }
-  //   });
-  // }
+  setPaginatedData(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedData = this.departments.slice(startIndex, endIndex);
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.setPaginatedData();
+  }
 
   delete(id: DepartmentModel) {
     this.dialogService.open(DeleteComponent)
