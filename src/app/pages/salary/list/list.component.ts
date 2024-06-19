@@ -3,8 +3,8 @@ import { Salary } from 'app/@core/interfaces/salary';
 import { SalaryService } from 'app/@core/services/apis/salary.service';
 import { Iemployee } from 'app/@core/interfaces/employee';
 import { Router } from "@angular/router";
-import {NbDialogService, NbToastrService} from '@nebular/theme';
-import {DeleteComponent} from "../../salary/delete/delete.component";
+import { NbDialogService, NbToastrService } from '@nebular/theme';
+import { DeleteComponent } from "../../salary/delete/delete.component";
 
 @Component({
   selector: 'app-list',
@@ -14,7 +14,10 @@ import {DeleteComponent} from "../../salary/delete/delete.component";
 export class ListComponent implements OnInit {
   listEmployees: Iemployee[] = [];
   listSalary: Salary[] = [];
-  combineData: any[];
+  combineDataa: any[] = [];
+  paginatedData: any[] = [];
+  currentPage: number = 1;
+  pageSize: number = 5;
 
   constructor(
     private salaryService: SalaryService,
@@ -30,7 +33,7 @@ export class ListComponent implements OnInit {
 
   getSalary(): void {
     this.salaryService.getAllSalary().subscribe(res => {
-      console.log(res.data);
+      console.log('Salaries:', res.data);
       this.listSalary = res.data;
       this.combineDatas();
     });
@@ -38,7 +41,7 @@ export class ListComponent implements OnInit {
 
   getEmployee(): void {
     this.salaryService.getAllEmployee().subscribe(res => {
-      console.log(res.data);
+      console.log('Employees:', res.data);
       this.listEmployees = res.data;
       this.combineDatas();
     });
@@ -46,42 +49,21 @@ export class ListComponent implements OnInit {
 
   combineDatas(): void {
     if (this.listSalary.length > 0 && this.listEmployees.length > 0) {
-      this.combineData = this.listSalary.map(salary => {
+      this.combineDataa = this.listSalary.map(salary => {
+        const employee = this.listEmployees.find(emp => emp.id === salary.employee_id);
         return {
           ...salary,
-          employeeName: this.listEmployees.find(cat => cat.id === salary.employee_id)?.name,
-          employeeId: this.listEmployees.find(cat => cat.id === salary.employee_id)?.id
+          employeeName: employee ? employee.name : 'Unknown',
+          employeeId: employee ? employee.id : null,
         };
       });
+      this.setPaginatedData();
     }
   }
-
-  // deleteSalary(id: number): void {
-  //   this.salaryService.deleteSalary(id).subscribe(
-  //     res => {
-  //       console.log('Deleted successfully');
-  //       // Hiển thị thông báo thành công
-  //       this.toastrService.success('Xóa thành công!', 'Thông báo');
-  //       this.combineData = this.combineData.filter(salary => salary.id !== id);
-  //     },
-  //     err => {
-  //       console.error('Error deleting salary:', err);
-  //       this.toastrService.danger('Có lỗi xảy ra khi xóa!', 'Thông báo');
-  //     }
-  //   );
-  // }
 
   editSalary(salaryId: number): void {
     this.router.navigate(['pages/Salary/edit', salaryId]);
   }
-
-  // confirmDelete(id: number): void {
-  //   const confirmDelete = confirm('Bạn có chắc chắn muốn xoá?');
-  //   if (confirmDelete) {
-  //     // Gọi hàm xử lý xoá
-  //     this.deleteSalary(id);
-  //   }
-  // }
 
   delete(id: number): void {
     this.dialogService.open(DeleteComponent)
@@ -90,7 +72,8 @@ export class ListComponent implements OnInit {
         this.salaryService.deleteSalary(id).subscribe({
           next: res => {
             this.toastrService.show('Xóa lương thành công!', 'Thành công', { status: 'success' });
-            this.combineDatas();
+            // Refresh data after deletion
+            this.getSalary();
           },
           error: err => {
             this.toastrService.show('Xóa lương thất bại. Vui lòng thử lại.', 'Lỗi', { status: 'danger' });
@@ -98,5 +81,17 @@ export class ListComponent implements OnInit {
         });
       }
     });
+  }
+
+  setPaginatedData(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedData = this.combineDataa.slice(startIndex, endIndex);
+    console.log('Paginated Data:', this.paginatedData);
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.setPaginatedData();
   }
 }

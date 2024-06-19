@@ -17,8 +17,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let s of combineData; let i = index">
-            <th scope="row">{{ i + 1 }}</th>
+          <tr *ngFor="let s of paginatedData;  index as i">
+            <th scope="row">{{ i + 1 + (currentPage - 1) * pageSize }}</th>
             <td>{{ s.employeeName }}</td>
             <td>{{ s.salary | number:'1.2-2' }} VNĐ</td>
             <td>{{ s.salarycong | number:'1.2-2' }} VNĐ</td>
@@ -31,6 +31,8 @@
           </tr>
           </tbody>
         </table>
+        <ngx-paginator [totalItems]="combineDataa.length" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></ngx-paginator>
+
       </div>
     </nb-card-body>
   </nb-card>

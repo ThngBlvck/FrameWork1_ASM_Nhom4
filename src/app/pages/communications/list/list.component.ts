@@ -4,7 +4,6 @@ import { Iemployee } from 'app/@core/interfaces/employee';
 import { Router } from "@angular/router";
 import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { CTions } from "../../../@core/interfaces/communications";
-
 import { DeleteComponent } from "../../communications/delete/delete.component";
 
 @Component({
@@ -16,7 +15,9 @@ export class ListComponent implements OnInit {
   listCTions: CTions[] = [];
   listEmployees: Iemployee[] = [];
   combineData: any[] = [];
-
+  paginatedData: any[] = [];
+  currentPage: number = 1;
+  pageSize: number = 5;
   constructor(
     private communicationsService: CommunicationsService,
     private router: Router,
@@ -77,5 +78,16 @@ export class ListComponent implements OnInit {
 
   editCtion(CtionId: number): void {
     this.router.navigate(['pages/Communications/edit', CtionId]);
+  }
+
+  setPaginatedData(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedData = this.listCTions.slice(startIndex, endIndex);
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.setPaginatedData();
   }
 }
