@@ -22,26 +22,28 @@ import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms'
 import { UpdateComponent } from './update/update.component';
 import { ListComponent } from './list/list.component';
 import { DeleteComponent } from './delete/delete.component';
+import {PaginatorModule} from "../../@theme/components/paginator/paginator.module";
 
 @NgModule({
-  imports: [
-    // Ng2SmartTableModule,
-    ThemeModule,
-    NbInputModule,
-    NbCardModule,
-    NbButtonModule,
-    NbActionsModule,
-    NbUserModule,
-    NbCheckboxModule,
-    NbRadioModule,
-    NbDatepickerModule,
-    PositionRoutingModule,
-    NbSelectModule,
-    NbIconModule,
-    ngFormsModule,
-    ReactiveFormsModule,
-    NbToastrModule
-  ],
+    imports: [
+        // Ng2SmartTableModule,
+        ThemeModule,
+        NbInputModule,
+        NbCardModule,
+        NbButtonModule,
+        NbActionsModule,
+        NbUserModule,
+        NbCheckboxModule,
+        NbRadioModule,
+        NbDatepickerModule,
+        PositionRoutingModule,
+        NbSelectModule,
+        NbIconModule,
+        ngFormsModule,
+        ReactiveFormsModule,
+        NbToastrModule,
+        PaginatorModule
+    ],
   declarations: [PositionComponent, AddComponent,  UpdateComponent, ListComponent, DeleteComponent],
 })
 export class PositionModule {}
