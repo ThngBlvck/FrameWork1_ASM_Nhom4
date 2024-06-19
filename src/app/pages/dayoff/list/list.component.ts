@@ -36,11 +36,11 @@ export class ListComponent implements OnInit{
       if (confirmed) {
         this.dayoff.deleteDayoff(id).subscribe({
           next: res => {
-            this.toastrService.show('Xóa chức vụ thành công!', 'Thành công', { status: 'success' });
+            this.toastrService.show('Xóa ngày nghĩ thành công!', 'Thành công', { status: 'success' });
             this.getAll();
           },
           error: err => {
-            this.toastrService.show('Xóa chức vụ thất bại. Vui lòng thử lại.', 'Lỗi', { status: 'danger' });
+            this.toastrService.show('Xóa ngày  thất bại. Vui lòng thử lại.', 'Lỗi', { status: 'danger' });
           }
         });
       }
