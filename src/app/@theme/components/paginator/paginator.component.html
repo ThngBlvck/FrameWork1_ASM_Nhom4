@@ -1,15 +1,17 @@
-<div class="custom-paginator pt-4">
-    <button nbButton status="primary" class="me-1" (click)="goFirstPage()" [disabled]="hasPreviousPage">
-        <nb-icon icon="skip-back-outline"></nb-icon>
-    </button>
-    <button nbButton status="primary" (click)="goPreviousPage()" [disabled]="hasPreviousPage">
-        <nb-icon icon="arrow-left-outline"></nb-icon>
-    </button>
-    <p class="paginator-page">{{ current_page }}/{{ last_page }}</p>
-    <button nbButton status="primary" class="me-1" (click)="goNextPage()" [disabled]="hasNextPage">
-        <nb-icon icon="arrow-right-outline"></nb-icon>
-    </button>
-    <button nbButton status="primary" (click)="goLastPage()" [disabled]="hasNextPage">
-        <nb-icon icon="skip-back-outline"></nb-icon>
-    </button>
+<div class="pagination-controls d-flex justify-content-center pt-4">
+  <button nbButton status="primary" (click)="goFirstPage()" [disabled]="currentPage === 1">
+    <nb-icon icon="skip-back-outline"></nb-icon>
+  </button>
+  <button nbButton status="primary" (click)="goPreviousPage()" [disabled]="currentPage === 1">
+    <nb-icon icon="arrow-left-outline"></nb-icon>
+  </button>
+  <div class="paginator-text m-2">
+    <span>{{ currentPage }} / {{ totalPages }}</span>
+  </div>
+  <button nbButton status="primary" (click)="goNextPage()" [disabled]="currentPage === totalPages">
+    <nb-icon icon="arrow-right-outline"></nb-icon>
+  </button>
+  <button nbButton status="primary" (click)="goLastPage()" [disabled]="currentPage === totalPages">
+    <nb-icon icon="skip-forward-outline"></nb-icon>
+  </button>
 </div>

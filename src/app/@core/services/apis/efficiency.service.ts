@@ -1,38 +1,37 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {forkJoin, Observable} from "rxjs";
-import {Iefficiency} from "../../interfaces/efficiency.interface";
-import {Iemployee} from "../../../pages/efficiency/efficiency.component";
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { forkJoin, Observable } from "rxjs";
+import { Iefficiency } from "../../interfaces/efficiency.interface";
+import { Iemployee } from "../../../pages/efficiency/efficiency.component";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EfficiencyService {
-
-  private apiUrEfficiency  = "http://localhost:5000/api/efficiency";
+  private apiUrEfficiency = "http://localhost:5000/api/efficiency";
   private apiUrlEmployee = "http://localhost:5000/api/employee";
-  constructor(
-    private http: HttpClient,
 
-  ) { }
+  constructor(private http: HttpClient) {}
 
-  getAllEfficiency(): Observable<any> {
-    return this.http.get(this.apiUrEfficiency);
+  getAllEfficiency(page: number = 1): Observable<any> {
+    let params = new HttpParams().set('page', page.toString());
+    return this.http.get(this.apiUrEfficiency, { params });
   }
 
-  getAllEmployee(): Observable<any> {
-    return this.http.get(this.apiUrlEmployee);
+  getAllEmployee(page: number = 1): Observable<any> {
+    let params = new HttpParams().set('page', page.toString());
+    return this.http.get(this.apiUrlEmployee, { params });
   }
 
-  getAllData(): Observable<any> {
+  getAllData(efficiencyPage: number = 1, employeePage: number = 1): Observable<any> {
     return forkJoin({
-      getEfficiencies: this.getAllEfficiency(),
-      getEmployees: this.getAllEmployee(),
+      getEfficiencies: this.getAllEfficiency(efficiencyPage),
+      getEmployees: this.getAllEmployee(employeePage),
     });
   }
 
   postEfficiency(efficiency: Iefficiency): Observable<any> {
-    return this.http.post(this.apiUrEfficiency,efficiency);
+    return this.http.post(this.apiUrEfficiency, efficiency);
   }
 
   deleteEfficiency(id: number): Observable<any> {

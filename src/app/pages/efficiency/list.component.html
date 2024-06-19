@@ -1,52 +1,49 @@
 <div class="container">
   <h3>Danh Sách Hiệu Suất</h3>
+  <button type="button" class="btn btn-primary my-2" [routerLink]="['add']">Thêm Hiệu Suất</button>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID Nhân Viên</th>
+      <th scope="col">Tên Nhân Viên</th>
+      <th scope="col">Công việc</th>
+      <th scope="col">Tiến độ hoàn thành</th>
+      <th scope="col">Tác vụ</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let u of paginatedData; index as i">
+      <th scope="row">{{ i + 1 + (currentPage - 1) * pageSize }}</th>
+      <td>{{ u.employeeId }}</td>
+      <td>{{ u.employeeName }}</td>
+      <td>{{ u.job }}</td>
+      <td>{{ getProgressText(u.progress) }}</td>
+      <td>
+        <button type="button" class="btn btn-outline-primary" [routerLink]="['edit', u.id]" style="margin-right: 5px;">Cập nhật</button>
+        <button type="button" class="btn btn-outline-danger" (click)="openDeleteModal(u)">Xoá</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <ngx-paginator [totalItems]="combinedData.length" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></ngx-paginator>
 
-<table class="table">
-  <thead class="thead-dark">
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">ID Nhân Viên</th>
-    <th scope="col">Tên Nhân Viên</th>
-    <th scope="col">Công việc</th>
-    <th scope="col">Tiến độ hoàn thành</th>
-    <th scope="col">Tác vụ</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let u of combinedData; index as i">
-    <th scope="row">{{ i + 1 }}</th>
-    <td>{{ u.employeeId }}</td>
-    <td>{{ u.employeeName }}</td>
-    <td>{{ u.job }}</td>
-    <td>{{ getProgressText(u.progress) }}</td>
-    <td>
-      <button type="button" class="btn btn-outline-primary" [routerLink]="['edit', u.id]" style="margin-right: 5px;">Cập nhật</button>
-      <button type="button" class="btn btn-outline-danger" (click)="openDeleteModal(u)">Xoá</button>
-    </td>
-  </tr>
-  </tbody>
-</table>
-
-<button type="button" class="btn btn-primary" [routerLink]="['add']">Thêm Hiệu Suất</button>
-
-<!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Bạn có chắc chắn muốn xóa?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelDelete()">Không</button>
-        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Xóa</button>
+  <!-- Delete Confirmation Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Bạn có chắc chắn muốn xóa?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelDelete()">Không</button>
+          <button type="button" class="btn btn-danger" (click)="confirmDelete()">Xóa</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
-
-

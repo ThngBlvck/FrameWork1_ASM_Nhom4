@@ -3,7 +3,8 @@ import { Iefficiency } from "../../@core/interfaces/efficiency.interface";
 import { EfficiencyService } from "../../@core/services/apis/efficiency.service";
 import { NgForOf, NgIf } from "@angular/common";
 import { RouterLink, Router } from "@angular/router";
-import { NbToastrService } from '@nebular/theme'; // Import NbToastrService
+import { NbToastrService } from '@nebular/theme';
+import {PaginatorModule} from "../../@theme/components/paginator/paginator.module"; // Import NbToastrService
 
 export interface Iemployee {
   id: number;
@@ -23,67 +24,64 @@ declare var $: any; // Khai báo biến $
   imports: [
     NgForOf,
     RouterLink,
-    NgIf
+    NgIf,
+    PaginatorModule
   ],
   standalone: true
 })
 export class EfficiencyComponent implements OnInit {
-  listEfficiency: Iefficiency[];
-  listEmployee: Iemployee[];
-  combinedData: any[];
-
+  listEfficiency: Iefficiency[] = [];
+  listEmployee: Iemployee[] = [];
+  combinedData: any[] = [];
+  paginatedData: any[] = [];
+  currentPage: number = 1;
+  pageSize: number = 5; // Set to 5 for displaying 5 items per page
   deleteId: number | null = null;
-  showSuccess: boolean = false;
 
   constructor(
     private efficiencyService: EfficiencyService,
     private router: Router,
-    private toastrService: NbToastrService // Tiêm NbToastrService
-  ) {
-
-  }
+    private toastrService: NbToastrService
+  ) {}
 
   ngOnInit(): void {
-    this.getEfficiency();
-    this.getEmployee();
+    this.loadAllData();
   }
 
-  getEfficiency(): void {
-    this.efficiencyService.getAllEfficiency().subscribe(
+  loadAllData(): void {
+    this.efficiencyService.getAllData().subscribe(
       (res) => {
-        console.log(res);
-        this.listEfficiency = res.data;
+        this.listEfficiency = res.getEfficiencies.data;
+        this.listEmployee = res.getEmployees.data;
         this.combineData();
+        this.setPaginatedData();
       },
       (error) => {
-        console.error('Lỗi khi lấy dữ liệu hiệu suất:', error);
-      }
-    );
-  }
-
-  getEmployee(): void {
-    this.efficiencyService.getAllEmployee().subscribe(
-      (res) => {
-        console.log(res);
-        this.listEmployee = res.data;
-        this.combineData();
-      },
-      (error) => {
-        console.error('Lỗi khi lấy dữ liệu nhân viên:', error);
+        console.error('Lỗi khi lấy dữ liệu:', error);
       }
     );
   }
 
   combineData(): void {
-    if (this.listEfficiency && this.listEmployee) {
-      this.combinedData = this.listEfficiency.map((efficiency) => {
-        return {
-          ...efficiency,
-          employeeName: this.listEmployee.find((emp) => emp.id === efficiency.employee_id)?.name,
-          employeeId: this.listEmployee.find((emp) => emp.id === efficiency.employee_id)?.id,
-        };
-      });
-    }
+    this.combinedData = this.listEfficiency.map((efficiency) => {
+      const employee = this.listEmployee.find((emp) => emp.id === efficiency.employee_id);
+      return {
+        ...efficiency,
+        employeeName: employee ? employee.name : '',
+        employeeId: employee ? employee.id : ''
+      };
+    });
+  }
+
+  setPaginatedData(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedData = this.combinedData.slice(startIndex, endIndex);
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.setPaginatedData();
   }
 
   getProgressText(progress: number): string {
@@ -97,28 +95,23 @@ export class EfficiencyComponent implements OnInit {
 
   cancelDelete(): void {
     $('#deleteModal').modal('hide');
-    this.deleteId = null; // Đặt lại deleteId khi hủy
+    this.deleteId = null;
   }
 
   confirmDelete(): void {
     if (this.deleteId !== null) {
       this.efficiencyService.deleteEfficiency(this.deleteId).subscribe(
         (res) => {
-          console.log('Đã xóa thành công');
           this.combinedData = this.combinedData.filter((item) => item.id !== this.deleteId);
-          this.toastrService.success('Đã xóa thành công', 'Success'); // Hiển thị thông báo thành công
-          $('#deleteModal').modal('hide'); // Ẩn modal sau khi xóa thành công
-          this.deleteId = null; // Đặt lại deleteId
+          this.setPaginatedData();
+          this.toastrService.success('Đã xóa thành công', 'Success');
+          $('#deleteModal').modal('hide');
+          this.deleteId = null;
         },
         (error) => {
-          console.error('Lỗi khi xóa hiệu suất:', error);
-          this.toastrService.danger('Lỗi khi xóa hiệu suất', 'Error'); // Hiển thị thông báo lỗi
+          this.toastrService.danger('Lỗi khi xóa hiệu suất', 'Error');
         }
       );
     }
-  }
-
-  hideSuccessMessage(): void {
-    this.showSuccess = false;
   }
 }
