@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface PositionInfoModel {
@@ -14,8 +14,9 @@ export class PositionService {
   [x: string]: any;
   constructor(private http: HttpClient) {}
 
-  getAllPositon(): Observable<any> {
-    return this.http.get(`${this.API_URL}`);
+  getAllPositon(page: number = 1): Observable<any> {
+    let params = new HttpParams().set('page', page.toString());
+    return this.http.get(`${this.API_URL}`, { params });
   }
   // getUnit():Observable<any>{
   //   return this.http.get('http://127.0.0.1:3000/api/position',{
