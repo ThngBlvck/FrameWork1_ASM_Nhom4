@@ -22,24 +22,26 @@ import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms'
 import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 import { DeleteComponent } from './delete/delete.component';
+import {PaginatorModule} from "../../@theme/components/paginator/paginator.module";
 
 @NgModule({
-  imports: [
-    ThemeModule,
-    NbInputModule,
-    NbCardModule,
-    NbButtonModule,
-    NbActionsModule,
-    NbUserModule,
-    NbCheckboxModule,
-    NbRadioModule,
-    NbDatepickerModule,
-    CommunicationsRoutingModule,
-    NbSelectModule,
-    NbIconModule,
-    ngFormsModule,
-    ReactiveFormsModule,
-  ],
+    imports: [
+        ThemeModule,
+        NbInputModule,
+        NbCardModule,
+        NbButtonModule,
+        NbActionsModule,
+        NbUserModule,
+        NbCheckboxModule,
+        NbRadioModule,
+        NbDatepickerModule,
+        CommunicationsRoutingModule,
+        NbSelectModule,
+        NbIconModule,
+        ngFormsModule,
+        ReactiveFormsModule,
+        PaginatorModule,
+    ],
   declarations: [CommunicationsComponent, AddComponent, EditComponent, ListComponent, DeleteComponent],
 })
 export class CommunicationsModule {}

@@ -14,8 +14,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let c of combineData;  index as i">
-          <th scope="row">{{ i + 1 }}</th>
+        <tr *ngFor="let c of paginatedData;  index as i">
+          <th scope="row">{{ i + 1 + (currentPage - 1) * pageSize }}</th>
           <td>{{c.employeeName}}</td>
           <td>{{c.email}}</td>
           <td>{{c.phone}}</td>
@@ -27,6 +27,8 @@
         </tr>
         </tbody>
       </table>
+      <ngx-paginator [totalItems]="listCTions.length" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></ngx-paginator>
+
     </nb-card-body>
   </nb-card>
 </div>

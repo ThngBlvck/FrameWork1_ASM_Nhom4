@@ -22,26 +22,28 @@ import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 import {SalaryService} from "../../@core/services/apis/salary.service";
 import { DeleteComponent } from './delete/delete.component';
+import {PaginatorModule} from "../../@theme/components/paginator/paginator.module";
 
 
 @NgModule({
-  imports: [
-    // Ng2SmartTableModule,
-    ThemeModule,
-    NbInputModule,
-    NbCardModule,
-    NbButtonModule,
-    NbActionsModule,
-    NbUserModule,
-    NbCheckboxModule,
-    NbRadioModule,
-    NbDatepickerModule,
-    SalaryRoutingModule,
-    NbSelectModule,
-    NbIconModule,
-    ngFormsModule,
-    ReactiveFormsModule,
-  ],
+    imports: [
+        // Ng2SmartTableModule,
+        ThemeModule,
+        NbInputModule,
+        NbCardModule,
+        NbButtonModule,
+        NbActionsModule,
+        NbUserModule,
+        NbCheckboxModule,
+        NbRadioModule,
+        NbDatepickerModule,
+        SalaryRoutingModule,
+        NbSelectModule,
+        NbIconModule,
+        ngFormsModule,
+        ReactiveFormsModule,
+        PaginatorModule,
+    ],
   providers: [
     SalaryService
   ],
