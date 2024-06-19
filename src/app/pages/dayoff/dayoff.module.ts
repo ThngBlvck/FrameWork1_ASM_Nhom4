@@ -22,26 +22,28 @@ import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms'
 import { ListComponent } from './list/list.component';
 import { UpdateComponent } from './update/update.component';
 import { DeleteComponent } from './delete/delete.component';
+import {PaginatorModule} from "../../@theme/components/paginator/paginator.module";
 
 @NgModule({
-  imports: [
-    // Ng2SmartTableModule,
-    ThemeModule,
-    NbInputModule,
-    NbCardModule,
-    NbButtonModule,
-    NbActionsModule,
-    NbUserModule,
-    NbCheckboxModule,
-    NbRadioModule,
-    NbDatepickerModule,
-    DayoffRoutingModule,
-    NbSelectModule,
-    NbIconModule,
-    ngFormsModule,
-    ReactiveFormsModule,
-    NbToastrModule
-  ],
+    imports: [
+        // Ng2SmartTableModule,
+        ThemeModule,
+        NbInputModule,
+        NbCardModule,
+        NbButtonModule,
+        NbActionsModule,
+        NbUserModule,
+        NbCheckboxModule,
+        NbRadioModule,
+        NbDatepickerModule,
+        DayoffRoutingModule,
+        NbSelectModule,
+        NbIconModule,
+        ngFormsModule,
+        ReactiveFormsModule,
+        NbToastrModule,
+        PaginatorModule
+    ],
   declarations: [DayoffComponent, AddComponent, ListComponent, UpdateComponent, DeleteComponent],
 })
 export class DayoffModule {}

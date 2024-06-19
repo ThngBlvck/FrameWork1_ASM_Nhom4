@@ -12,7 +12,10 @@ import {DeleteComponent} from "../delete/delete.component";
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit{
-  dataP!: PositionInfoModel;
+  dataP: PositionInfoModel[] = [];
+  paginatedData: any[] = [];
+  currentPage: number = 1;
+  pageSize: number = 5;
 
   constructor(
     private http: HttpClient,
@@ -31,7 +34,18 @@ export class ListComponent implements OnInit{
     this.position.getAllPositon().subscribe(res =>{
       this.dataP = res.data;
       console.log(this.dataP);
+      this.setPaginatedData();
     })
+  }
+  setPaginatedData(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedData = this.dataP.slice(startIndex, endIndex);
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.setPaginatedData();
   }
   deletePosition(id: PositionInfoModel) {
     this.dialogService.open(DeleteComponent)
