@@ -83,7 +83,7 @@ export class ListComponent implements OnInit {
   setPaginatedData(): void {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    this.paginatedData = this.listCTions.slice(startIndex, endIndex);
+    this.paginatedData = this.combineData.slice(startIndex, endIndex);
   }
 
   onPageChange(page: number): void {
